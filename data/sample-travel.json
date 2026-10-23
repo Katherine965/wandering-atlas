@@ -1,0 +1,219 @@
+{
+  "description": "All entries are fictional demonstrations. Coordinates identify public cities; images are original local placeholders.",
+  "places": [
+    {
+      "id": "sample-journey-paris",
+      "type": "journey",
+      "city": "Paris (Sample Journey)",
+      "country": "France",
+      "coordinates": {
+        "latitude": 48.8566,
+        "longitude": 2.3522
+      },
+      "startYear": 2020,
+      "coverImage": {
+        "id": "sample-image-1",
+        "src": "/images/sample/placeholder-1.svg",
+        "storageKey": "images/sample/placeholder-1.svg",
+        "width": 1000,
+        "height": 650,
+        "caption": "Original vector placeholder — not a travel photograph.",
+        "order": 0,
+        "year": 2022,
+        "month": 4
+      },
+      "photos": [
+        {
+          "id": "sample-image-1",
+          "src": "/images/sample/placeholder-1.svg",
+          "storageKey": "images/sample/placeholder-1.svg",
+          "width": 1000,
+          "height": 650,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 0,
+          "year": 2022,
+          "month": 4
+        },
+        {
+          "id": "sample-image-2",
+          "src": "/images/sample/placeholder-2.svg",
+          "storageKey": "images/sample/placeholder-2.svg",
+          "width": 1000,
+          "height": 650,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 1,
+          "year": 2023,
+          "month": 5
+        },
+        {
+          "id": "sample-image-3",
+          "src": "/images/sample/placeholder-3.svg",
+          "storageKey": "images/sample/placeholder-3.svg",
+          "width": 1000,
+          "height": 650,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 2,
+          "year": 2024,
+          "month": 6
+        }
+      ],
+      "memory": "Fictional demonstration entry. No actual visit, personal memory or photograph is represented.",
+      "tags": [
+        "synthetic",
+        "sample"
+      ],
+      "rating": 4
+    },
+    {
+      "id": "sample-location-kyoto",
+      "type": "location",
+      "city": "Kyoto (Sample Location)",
+      "country": "Japan",
+      "coordinates": {
+        "latitude": 35.0116,
+        "longitude": 135.7681
+      },
+      "startYear": 2022,
+      "startMonth": 4,
+      "coverImage": {
+        "id": "sample-image-4",
+        "src": "/images/sample/placeholder-4.svg",
+        "storageKey": "images/sample/placeholder-4.svg",
+        "width": 600,
+        "height": 900,
+        "caption": "Original vector placeholder — not a travel photograph.",
+        "order": 3,
+        "year": 2025,
+        "month": 7
+      },
+      "photos": [
+        {
+          "id": "sample-image-4",
+          "src": "/images/sample/placeholder-4.svg",
+          "storageKey": "images/sample/placeholder-4.svg",
+          "width": 600,
+          "height": 900,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 3,
+          "year": 2025,
+          "month": 7
+        },
+        {
+          "id": "sample-image-1",
+          "src": "/images/sample/placeholder-1.svg",
+          "storageKey": "images/sample/placeholder-1.svg",
+          "width": 1000,
+          "height": 650,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 0,
+          "year": 2022,
+          "month": 4
+        },
+        {
+          "id": "sample-image-2",
+          "src": "/images/sample/placeholder-2.svg",
+          "storageKey": "images/sample/placeholder-2.svg",
+          "width": 1000,
+          "height": 650,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 1,
+          "year": 2023,
+          "month": 5
+        }
+      ],
+      "memory": "Fictional multi-year sample location for the Timeline and gallery.",
+      "tags": [
+        "synthetic",
+        "sample"
+      ]
+    },
+    {
+      "id": "sample-journey-denver",
+      "type": "journey",
+      "city": "Denver (Sample Journey)",
+      "country": "United States of America",
+      "coordinates": {
+        "latitude": 39.7392,
+        "longitude": -104.9903
+      },
+      "startYear": 2024,
+      "coverImage": {
+        "id": "sample-image-2",
+        "src": "/images/sample/placeholder-2.svg",
+        "storageKey": "images/sample/placeholder-2.svg",
+        "width": 1000,
+        "height": 650,
+        "caption": "Original vector placeholder — not a travel photograph.",
+        "order": 1,
+        "year": 2023,
+        "month": 5
+      },
+      "photos": [
+        {
+          "id": "sample-image-2",
+          "src": "/images/sample/placeholder-2.svg",
+          "storageKey": "images/sample/placeholder-2.svg",
+          "width": 1000,
+          "height": 650,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 1,
+          "year": 2023,
+          "month": 5
+        },
+        {
+          "id": "sample-image-3",
+          "src": "/images/sample/placeholder-3.svg",
+          "storageKey": "images/sample/placeholder-3.svg",
+          "width": 1000,
+          "height": 650,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 2,
+          "year": 2024,
+          "month": 6
+        }
+      ],
+      "memory": "Synthetic demonstration record, not an actual travel itinerary.",
+      "tags": [
+        "synthetic"
+      ]
+    },
+    {
+      "id": "sample-location-sydney",
+      "type": "location",
+      "city": "Sydney (Sample Location)",
+      "country": "Australia",
+      "coordinates": {
+        "latitude": -33.8688,
+        "longitude": 151.2093
+      },
+      "coverImage": {
+        "id": "sample-image-3",
+        "src": "/images/sample/placeholder-3.svg",
+        "storageKey": "images/sample/placeholder-3.svg",
+        "width": 1000,
+        "height": 650,
+        "caption": "Original vector placeholder — not a travel photograph.",
+        "order": 2,
+        "year": 2024,
+        "month": 6
+      },
+      "photos": [
+        {
+          "id": "sample-image-3",
+          "src": "/images/sample/placeholder-3.svg",
+          "storageKey": "images/sample/placeholder-3.svg",
+          "width": 1000,
+          "height": 650,
+          "caption": "Original vector placeholder — not a travel photograph.",
+          "order": 2,
+          "year": 2024,
+          "month": 6
+        }
+      ],
+      "memory": "An intentionally undated fictional location to demonstrate optional date fields.",
+      "tags": [
+        "sample"
+      ]
+    }
+  ]
+}

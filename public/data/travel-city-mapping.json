@@ -1,0 +1,641 @@
+{
+  "schema_version": 1,
+  "description": "WGS84 city suggestions: 95 Natural Earth points (Public Domain) and 4 GeoNames features (CC BY 4.0, https://creativecommons.org/licenses/by/4.0/). Source records extracted and regrouped; see THIRD_PARTY_NOTICES.md and docs/CITY_COORDINATE_SOURCES.csv.",
+  "countries": [
+    {
+      "name": "China",
+      "cities": [
+        {
+          "name": "Beijing",
+          "latitude": 39.930838,
+          "longitude": 116.38634
+        },
+        {
+          "name": "Shanghai",
+          "latitude": 31.218398,
+          "longitude": 121.434559
+        },
+        {
+          "name": "Guangzhou",
+          "latitude": 23.146927,
+          "longitude": 113.323064
+        },
+        {
+          "name": "Shenzhen",
+          "latitude": 22.554316,
+          "longitude": 114.120177
+        },
+        {
+          "name": "Hong Kong",
+          "latitude": 22.306927,
+          "longitude": 114.183064
+        },
+        {
+          "name": "Chengdu",
+          "latitude": 30.671946,
+          "longitude": 104.068074
+        },
+        {
+          "name": "Hangzhou",
+          "latitude": 30.25192,
+          "longitude": 120.168073
+        },
+        {
+          "name": "Xi'an",
+          "latitude": 34.276971,
+          "longitude": 108.89305
+        }
+      ]
+    },
+    {
+      "name": "Japan",
+      "cities": [
+        {
+          "name": "Tokyo",
+          "latitude": 35.686963,
+          "longitude": 139.749462
+        },
+        {
+          "name": "Kyoto",
+          "latitude": 35.031938,
+          "longitude": 135.748052
+        },
+        {
+          "name": "Osaka",
+          "latitude": 34.751981,
+          "longitude": 135.458199
+        },
+        {
+          "name": "Sapporo",
+          "latitude": 43.076925,
+          "longitude": 141.338099
+        },
+        {
+          "name": "Fukuoka",
+          "latitude": 33.596961,
+          "longitude": 130.408068
+        }
+      ]
+    },
+    {
+      "name": "Singapore",
+      "cities": [
+        {
+          "name": "Singapore",
+          "latitude": 1.294979,
+          "longitude": 103.853875
+        }
+      ]
+    },
+    {
+      "name": "South Korea",
+      "cities": [
+        {
+          "name": "Seoul",
+          "latitude": 37.568295,
+          "longitude": 126.997785
+        },
+        {
+          "name": "Busan",
+          "latitude": 35.096999,
+          "longitude": 129.008102
+        },
+        {
+          "name": "Jeju",
+          "latitude": 33.510137,
+          "longitude": 126.521931
+        }
+      ]
+    },
+    {
+      "name": "Thailand",
+      "cities": [
+        {
+          "name": "Bangkok",
+          "latitude": 13.751945,
+          "longitude": 100.514699
+        },
+        {
+          "name": "Chiang Mai",
+          "latitude": 18.799975,
+          "longitude": 98.980046
+        },
+        {
+          "name": "Phuket",
+          "latitude": 7.876533,
+          "longitude": 98.38153
+        }
+      ]
+    },
+    {
+      "name": "Vietnam",
+      "cities": [
+        {
+          "name": "Hanoi",
+          "latitude": 21.035273,
+          "longitude": 105.848068
+        },
+        {
+          "name": "Ho Chi Minh City",
+          "latitude": 10.781971,
+          "longitude": 106.693081
+        },
+        {
+          "name": "Da Nang",
+          "latitude": 16.060039,
+          "longitude": 108.249971
+        }
+      ]
+    },
+    {
+      "name": "France",
+      "cities": [
+        {
+          "name": "Paris",
+          "latitude": 48.868639,
+          "longitude": 2.33139
+        },
+        {
+          "name": "Lyon",
+          "latitude": 45.771954,
+          "longitude": 4.828085
+        },
+        {
+          "name": "Nice",
+          "latitude": 43.716964,
+          "longitude": 7.263078
+        },
+        {
+          "name": "Bordeaux",
+          "latitude": 44.851959,
+          "longitude": -0.596959
+        }
+      ]
+    },
+    {
+      "name": "Italy",
+      "cities": [
+        {
+          "name": "Rome",
+          "latitude": 41.897902,
+          "longitude": 12.481313
+        },
+        {
+          "name": "Milan",
+          "latitude": 45.471921,
+          "longitude": 9.203063
+        },
+        {
+          "name": "Florence",
+          "latitude": 43.780001,
+          "longitude": 11.25
+        },
+        {
+          "name": "Venice",
+          "latitude": 45.438659,
+          "longitude": 12.334999
+        },
+        {
+          "name": "Naples",
+          "latitude": 40.841971,
+          "longitude": 14.243066
+        }
+      ]
+    },
+    {
+      "name": "Iceland",
+      "cities": [
+        {
+          "name": "Reykjavik",
+          "latitude": 64.150024,
+          "longitude": -21.950015
+        },
+        {
+          "name": "Akureyri",
+          "latitude": 65.666572,
+          "longitude": -18.100017
+        },
+        {
+          "name": "Vik",
+          "latitude": 63.41944,
+          "longitude": -19.00972
+        }
+      ]
+    },
+    {
+      "name": "Norway",
+      "cities": [
+        {
+          "name": "Oslo",
+          "latitude": 59.918636,
+          "longitude": 10.748033
+        },
+        {
+          "name": "Bergen",
+          "latitude": 60.391002,
+          "longitude": 5.324522
+        },
+        {
+          "name": "Tromso",
+          "latitude": 69.635076,
+          "longitude": 18.992025
+        }
+      ]
+    },
+    {
+      "name": "United Kingdom",
+      "cities": [
+        {
+          "name": "London",
+          "latitude": 51.501941,
+          "longitude": -0.118668
+        },
+        {
+          "name": "Edinburgh",
+          "latitude": 55.948328,
+          "longitude": -3.219091
+        },
+        {
+          "name": "Manchester",
+          "latitude": 53.502361,
+          "longitude": -2.249933
+        },
+        {
+          "name": "Oxford",
+          "latitude": 51.770418,
+          "longitude": -1.249986
+        }
+      ]
+    },
+    {
+      "name": "Netherlands",
+      "cities": [
+        {
+          "name": "Amsterdam",
+          "latitude": 52.351915,
+          "longitude": 4.914694
+        },
+        {
+          "name": "Rotterdam",
+          "latitude": 51.921915,
+          "longitude": 4.478029
+        },
+        {
+          "name": "Eindhoven",
+          "latitude": 51.429973,
+          "longitude": 5.500015
+        }
+      ]
+    },
+    {
+      "name": "Germany",
+      "cities": [
+        {
+          "name": "Berlin",
+          "latitude": 52.523765,
+          "longitude": 13.399603
+        },
+        {
+          "name": "Munich",
+          "latitude": 48.131888,
+          "longitude": 11.573048
+        },
+        {
+          "name": "Hamburg",
+          "latitude": 53.551971,
+          "longitude": 9.998053
+        },
+        {
+          "name": "Frankfurt",
+          "latitude": 50.099977,
+          "longitude": 8.675015
+        }
+      ]
+    },
+    {
+      "name": "Spain",
+      "cities": [
+        {
+          "name": "Madrid",
+          "latitude": 40.401972,
+          "longitude": -3.685298
+        },
+        {
+          "name": "Barcelona",
+          "latitude": 41.385245,
+          "longitude": 2.181425
+        },
+        {
+          "name": "Seville",
+          "latitude": 37.405015,
+          "longitude": -5.980007
+        },
+        {
+          "name": "Valencia",
+          "latitude": 39.486963,
+          "longitude": -0.401958
+        }
+      ]
+    },
+    {
+      "name": "Portugal",
+      "cities": [
+        {
+          "name": "Lisbon",
+          "latitude": 38.724669,
+          "longitude": -9.146812
+        },
+        {
+          "name": "Porto",
+          "latitude": 41.151952,
+          "longitude": -8.621947
+        },
+        {
+          "name": "Funchal",
+          "latitude": 32.649983,
+          "longitude": -16.88004
+        }
+      ]
+    },
+    {
+      "name": "Switzerland",
+      "cities": [
+        {
+          "name": "Zurich",
+          "latitude": 47.381934,
+          "longitude": 8.548064
+        },
+        {
+          "name": "Geneva",
+          "latitude": 46.210008,
+          "longitude": 6.140028
+        },
+        {
+          "name": "Lucerne",
+          "latitude": 47.050421,
+          "longitude": 8.280001
+        },
+        {
+          "name": "Interlaken",
+          "latitude": 46.68387,
+          "longitude": 7.86638
+        }
+      ]
+    },
+    {
+      "name": "Austria",
+      "cities": [
+        {
+          "name": "Vienna",
+          "latitude": 48.201961,
+          "longitude": 16.364693
+        },
+        {
+          "name": "Salzburg",
+          "latitude": 47.810478,
+          "longitude": 13.04002
+        },
+        {
+          "name": "Innsbruck",
+          "latitude": 47.280407,
+          "longitude": 11.409991
+        }
+      ]
+    },
+    {
+      "name": "Czechia",
+      "cities": [
+        {
+          "name": "Prague",
+          "latitude": 50.085283,
+          "longitude": 14.464034
+        },
+        {
+          "name": "Brno",
+          "latitude": 49.200394,
+          "longitude": 16.609983
+        }
+      ]
+    },
+    {
+      "name": "Greece",
+      "cities": [
+        {
+          "name": "Athens",
+          "latitude": 37.985272,
+          "longitude": 23.731375
+        },
+        {
+          "name": "Thessaloniki",
+          "latitude": 40.698052,
+          "longitude": 22.883055
+        },
+        {
+          "name": "Santorini",
+          "latitude": 36.40572,
+          "longitude": 25.45682
+        }
+      ]
+    },
+    {
+      "name": "Turkey",
+      "cities": [
+        {
+          "name": "Istanbul",
+          "latitude": 41.106942,
+          "longitude": 29.008056
+        },
+        {
+          "name": "Cappadocia",
+          "latitude": 38.65,
+          "longitude": 34.83333
+        },
+        {
+          "name": "Izmir",
+          "latitude": 38.438096,
+          "longitude": 27.149848
+        }
+      ]
+    },
+    {
+      "name": "Egypt",
+      "cities": [
+        {
+          "name": "Cairo",
+          "latitude": 30.051906,
+          "longitude": 31.248022
+        },
+        {
+          "name": "Luxor",
+          "latitude": 25.700019,
+          "longitude": 32.650038
+        },
+        {
+          "name": "Alexandria",
+          "latitude": 31.201965,
+          "longitude": 29.94805
+        }
+      ]
+    },
+    {
+      "name": "United Arab Emirates",
+      "cities": [
+        {
+          "name": "Dubai",
+          "latitude": 25.231942,
+          "longitude": 55.278029
+        },
+        {
+          "name": "Abu Dhabi",
+          "latitude": 24.466684,
+          "longitude": 54.366593
+        }
+      ]
+    },
+    {
+      "name": "United States",
+      "cities": [
+        {
+          "name": "New York",
+          "latitude": 40.751925,
+          "longitude": -73.981963
+        },
+        {
+          "name": "Los Angeles",
+          "latitude": 33.991924,
+          "longitude": -118.181926
+        },
+        {
+          "name": "San Francisco",
+          "latitude": 37.769196,
+          "longitude": -122.417169
+        },
+        {
+          "name": "Chicago",
+          "latitude": 41.831937,
+          "longitude": -87.752001
+        },
+        {
+          "name": "Boston",
+          "latitude": 42.331906,
+          "longitude": -71.07196
+        },
+        {
+          "name": "Seattle",
+          "latitude": 47.571948,
+          "longitude": -122.341931
+        }
+      ]
+    },
+    {
+      "name": "Canada",
+      "cities": [
+        {
+          "name": "Toronto",
+          "latitude": 43.701926,
+          "longitude": -79.421967
+        },
+        {
+          "name": "Vancouver",
+          "latitude": 49.275362,
+          "longitude": -123.12359
+        },
+        {
+          "name": "Montreal",
+          "latitude": 45.501945,
+          "longitude": -73.585243
+        },
+        {
+          "name": "Quebec City",
+          "latitude": 46.839969,
+          "longitude": -71.24561
+        }
+      ]
+    },
+    {
+      "name": "Australia",
+      "cities": [
+        {
+          "name": "Sydney",
+          "latitude": -33.918065,
+          "longitude": 151.183234
+        },
+        {
+          "name": "Melbourne",
+          "latitude": -37.818086,
+          "longitude": 144.97307
+        },
+        {
+          "name": "Brisbane",
+          "latitude": -27.453085,
+          "longitude": 153.033147
+        },
+        {
+          "name": "Perth",
+          "latitude": -31.953069,
+          "longitude": 115.838053
+        }
+      ]
+    },
+    {
+      "name": "New Zealand",
+      "cities": [
+        {
+          "name": "Auckland",
+          "latitude": -36.848055,
+          "longitude": 174.763027
+        },
+        {
+          "name": "Wellington",
+          "latitude": -41.299988,
+          "longitude": 174.783266
+        },
+        {
+          "name": "Queenstown",
+          "latitude": -45.022672,
+          "longitude": 168.725081
+        }
+      ]
+    },
+    {
+      "name": "South Africa",
+      "cities": [
+        {
+          "name": "Cape Town",
+          "latitude": -33.918065,
+          "longitude": 18.433042
+        },
+        {
+          "name": "Johannesburg",
+          "latitude": -26.168099,
+          "longitude": 28.028064
+        },
+        {
+          "name": "Durban",
+          "latitude": -29.863067,
+          "longitude": 30.978065
+        }
+      ]
+    },
+    {
+      "name": "Morocco",
+      "cities": [
+        {
+          "name": "Marrakesh",
+          "latitude": 31.631939,
+          "longitude": -8.001933
+        },
+        {
+          "name": "Casablanca",
+          "latitude": 33.601922,
+          "longitude": -7.618313
+        },
+        {
+          "name": "Fes",
+          "latitude": 34.056546,
+          "longitude": -5.002323
+        }
+      ]
+    }
+  ]
+}

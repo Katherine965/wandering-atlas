@@ -1,0 +1,2 @@
+import tseslint from "typescript-eslint";
+export default tseslint.config({ ignores: ["dist/**", "node_modules/**", "artifacts/**"] }, ...tseslint.configs.recommended, { files: ["**/*.{ts,tsx,mjs}"], languageOptions: { globals: { console: "readonly", Buffer: "readonly", process: "readonly", URL: "readonly", fetch: "readonly", setTimeout: "readonly" } }, rules: { "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }], "@typescript-eslint/no-explicit-any": "error" } });

@@ -1,0 +1,44 @@
+path,origin
+.gitignore,new standalone entry/configuration/read-only runtime or verification file
+README.md,new standalone entry/configuration/read-only runtime or verification file
+THIRD_PARTY_NOTICES.md,new standalone entry/configuration/read-only runtime or verification file
+app/components/Image.tsx,new standalone entry/configuration/read-only runtime or verification file
+app/main.tsx,new standalone entry/configuration/read-only runtime or verification file
+app/travel/travel-data-source.ts,new standalone entry/configuration/read-only runtime or verification file
+data/sample-travel.json,new standalone entry/configuration/read-only runtime or verification file
+docs/ARCHITECTURE.md,new public-safe candidate documentation/evidence
+docs/ASSET_PROVENANCE.csv,new public-safe candidate documentation/evidence
+docs/CUSTOMIZATION.md,new public-safe candidate documentation/evidence
+docs/EXTRACTION_ALLOWLIST.json,new public-safe candidate documentation/evidence
+docs/EXTRACTION_MANIFEST.csv,new public-safe candidate documentation/evidence
+docs/GENERATED_FILES.csv,new public-safe candidate documentation/evidence
+docs/RELEASE_BLOCKERS.md,new public-safe candidate documentation/evidence
+docs/SECURITY.md,new public-safe candidate documentation/evidence
+docs/THEMES.md,new public-safe candidate documentation/evidence
+docs/VALIDATION.md,new public-safe candidate documentation/evidence
+eslint.config.mjs,new standalone entry/configuration/read-only runtime or verification file
+index.html,new standalone entry/configuration/read-only runtime or verification file
+licenses/d3-geo-LICENSE.txt,upstream license notice copied from independently installed dependency
+licenses/fontsource-instrument-serif-LICENSE.txt,upstream license notice copied from independently installed dependency
+licenses/lucide-react-LICENSE.txt,upstream license notice copied from independently installed dependency
+licenses/react-LICENSE.txt,upstream license notice copied from independently installed dependency
+licenses/react-dom-LICENSE.txt,upstream license notice copied from independently installed dependency
+licenses/tailwindcss-LICENSE.txt,upstream license notice copied from independently installed dependency
+licenses/three-LICENSE.txt,upstream license notice copied from independently installed dependency
+licenses/tw-animate-css-LICENSE.txt,upstream license notice copied from independently installed dependency
+package-lock.json,new independently resolved dependency lockfile
+package.json,new standalone entry/configuration/read-only runtime or verification file
+playwright.config.ts,new standalone entry/configuration/read-only runtime or verification file
+postcss.config.mjs,new standalone entry/configuration/read-only runtime or verification file
+public/images/sample/placeholder-1.svg,new original synthetic SVG placeholder
+public/images/sample/placeholder-2.svg,new original synthetic SVG placeholder
+public/images/sample/placeholder-3.svg,new original synthetic SVG placeholder
+public/images/sample/placeholder-4.svg,new original synthetic SVG placeholder
+scripts/read-only.ts,new standalone entry/configuration/read-only runtime or verification file
+scripts/scan.mjs,new standalone entry/configuration/read-only runtime or verification file
+scripts/serve.ts,new standalone entry/configuration/read-only runtime or verification file
+tests/browser/themes.spec.ts,new standalone entry/configuration/read-only runtime or verification file
+tests/data.test.ts,new standalone entry/configuration/read-only runtime or verification file
+tests/runtime-boundaries.test.ts,new standalone entry/configuration/read-only runtime or verification file
+tsconfig.json,new standalone entry/configuration/read-only runtime or verification file
+vite.config.ts,new standalone entry/configuration/read-only runtime or verification file

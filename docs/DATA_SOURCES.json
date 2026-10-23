@@ -1,0 +1,64 @@
+{
+  "audit_date": "2026-10-23",
+  "datasets": [
+    {
+      "file_path": "public/data/travel-world-countries-50m.geojson",
+      "source": "Natural Earth",
+      "license": "Public Domain",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_50m_admin_0_countries.geojson",
+      "upstream_revision": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "upstream_version": "5.1.1",
+      "sha256": "3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb",
+      "verification": "Exact byte and SHA-256 match to pinned upstream GeoJSON; no local conversion",
+      "terms_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "terms_file": "licenses/natural-earth-TERMS.txt"
+    },
+    {
+      "file_path": "public/data/travel-world-landmass-50m.geojson",
+      "source": "Natural Earth",
+      "license": "Public Domain",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_50m_land.geojson",
+      "upstream_revision": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "upstream_version": "4.1.0",
+      "sha256": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+      "verification": "Exact byte and SHA-256 match to pinned upstream GeoJSON; no local conversion",
+      "terms_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "terms_file": "licenses/natural-earth-TERMS.txt"
+    },
+    {
+      "file_path": "public/data/travel-country-detail-10m.geojson",
+      "source": "Natural Earth",
+      "license": "Public Domain",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_0_countries.geojson",
+      "upstream_revision": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "upstream_version": "5.1.1",
+      "sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255",
+      "verification": "Exact byte and SHA-256 match to pinned upstream GeoJSON; no local conversion",
+      "terms_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "terms_file": "licenses/natural-earth-TERMS.txt"
+    }
+  ],
+  "city_mapping": {
+    "file_path": "public/data/travel-city-mapping.json",
+    "sha256": "df9a8451ea1d9852f534408a31d39b6f5870221dc80b5e06a07cb207ba175b3a",
+    "status": "Resolved \u2014 all 99 coordinates regenerated from verified licensed source records",
+    "schema_version": 1,
+    "countries": 28,
+    "cities": 99,
+    "source_counts": {
+      "Natural Earth": 95,
+      "GeoNames": 4
+    },
+    "license": "Natural Earth Public Domain + GeoNames CC-BY-4.0",
+    "source_snapshot_file": "docs/data/city-source-snapshot.json",
+    "source_snapshot_sha256": "ec31137a5618894fe3bb754f8644a3c411d7172322a71ec48f8bb097ff9ee751",
+    "row_evidence_file": "docs/CITY_COORDINATE_SOURCES.csv",
+    "row_evidence_sha256": "717f6c28fad39fadbfeb8ebef0195c069d72f56cab6f1186455e9f2b167c958d",
+    "generator": "scripts/generate-city-mapping.py",
+    "generation_command": "python3 scripts/generate-city-mapping.py --write",
+    "verification_command": "python3 scripts/generate-city-mapping.py --check",
+    "replaced_legacy_sha256": "9262f1ce17935e43a95be4798ca2f7b122bb7f82fd27d570be5029fd06811f94",
+    "legacy_origin_note": "Old coordinate source unresolved; no old coordinate values reused. Existing labels/order retained.",
+    "review_file": "docs/CITY_DATA_REVIEW.md"
+  }
+}

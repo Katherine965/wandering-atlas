@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+artifacts/
+.env*
+.dev.vars*
+.DS_Store
+*.tsbuildinfo
+
+# Personal archive, uploaded images, backups and opt-in public export
+.local/
+data/travel.json
+public/uploads/

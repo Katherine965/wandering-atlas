@@ -1,0 +1,469 @@
+{
+  "scope": "Five-theme read-only candidate. No source history, persistence, auth, uploads or private content.",
+  "files": [
+    {
+      "source": "app/travel/page.tsx",
+      "destination": "app/travel/page.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelAtlasStage.tsx",
+      "destination": "app/travel/components/TravelAtlasStage.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelButton.tsx",
+      "destination": "app/travel/components/TravelButton.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelCopperGlobeSurface.tsx",
+      "destination": "app/travel/components/TravelCopperGlobeSurface.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelFairyFeltGlobeSurface.tsx",
+      "destination": "app/travel/components/TravelFairyFeltGlobeSurface.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelGlobe.tsx",
+      "destination": "app/travel/components/TravelGlobe.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelGlobeGeographicLabels.tsx",
+      "destination": "app/travel/components/TravelGlobeGeographicLabels.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelHeader.tsx",
+      "destination": "app/travel/components/TravelHeader.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelLegend.tsx",
+      "destination": "app/travel/components/TravelLegend.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelLightbox.tsx",
+      "destination": "app/travel/components/TravelLightbox.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelMap.tsx",
+      "destination": "app/travel/components/TravelMap.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelMapDetailToggle.tsx",
+      "destination": "app/travel/components/TravelMapDetailToggle.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelMarker.tsx",
+      "destination": "app/travel/components/TravelMarker.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelMarkerLayer.tsx",
+      "destination": "app/travel/components/TravelMarkerLayer.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelPostcard.tsx",
+      "destination": "app/travel/components/TravelPostcard.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelThemeSwitcher.tsx",
+      "destination": "app/travel/components/TravelThemeSwitcher.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelTimeline.tsx",
+      "destination": "app/travel/components/TravelTimeline.tsx"
+    },
+    {
+      "source": "app/travel/components/TravelZoomControl.tsx",
+      "destination": "app/travel/components/TravelZoomControl.tsx"
+    },
+    {
+      "source": "app/travel/travel-storage.ts",
+      "destination": "app/travel/travel-storage.ts"
+    },
+    {
+      "source": "app/travel/travel-time.ts",
+      "destination": "app/travel/travel-time.ts"
+    },
+    {
+      "source": "app/travel/travel-geometry.ts",
+      "destination": "app/travel/travel-geometry.ts"
+    },
+    {
+      "source": "app/travel/travel-globe-labels.ts",
+      "destination": "app/travel/travel-globe-labels.ts"
+    },
+    {
+      "source": "app/travel/themes/types.ts",
+      "destination": "app/travel/themes/types.ts"
+    },
+    {
+      "source": "app/travel/themes/registry.ts",
+      "destination": "app/travel/themes/registry.ts"
+    },
+    {
+      "source": "app/travel/themes/use-travel-theme.ts",
+      "destination": "app/travel/themes/use-travel-theme.ts"
+    },
+    {
+      "source": "app/travel/themes/parchment.ts",
+      "destination": "app/travel/themes/parchment.ts"
+    },
+    {
+      "source": "app/travel/themes/cyber.ts",
+      "destination": "app/travel/themes/cyber.ts"
+    },
+    {
+      "source": "app/travel/themes/deep-sea.ts",
+      "destination": "app/travel/themes/deep-sea.ts"
+    },
+    {
+      "source": "app/travel/themes/ice-world.ts",
+      "destination": "app/travel/themes/ice-world.ts"
+    },
+    {
+      "source": "app/travel/themes/fairy-tale.ts",
+      "destination": "app/travel/themes/fairy-tale.ts"
+    },
+    {
+      "source": "app/globals.css",
+      "destination": "app/globals.css"
+    },
+    {
+      "source": "vendor/shadcn-tailwind-4.13.0.css",
+      "destination": "vendor/shadcn-tailwind-4.13.0.css"
+    },
+    {
+      "source": "vendor/shadcn-tailwind-4.13.0.LICENSE.md",
+      "destination": "vendor/shadcn-tailwind-4.13.0.LICENSE.md"
+    },
+    {
+      "source": "public/data/travel-world-countries-50m.geojson",
+      "destination": "public/data/travel-world-countries-50m.geojson"
+    },
+    {
+      "source": "public/data/travel-world-landmass-50m.geojson",
+      "destination": "public/data/travel-world-landmass-50m.geojson"
+    },
+    {
+      "source": "public/data/travel-country-detail-10m.geojson",
+      "destination": "public/data/travel-country-detail-10m.geojson"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/SKILL.md",
+      "destination": "docs/skills/travel-theme-builder/SKILL.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/SKILL.zh-CN.md",
+      "destination": "docs/skills/travel-theme-builder/SKILL.zh-CN.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/01-architecture.md",
+      "destination": "docs/skills/travel-theme-builder/references/01-architecture.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/02-layout-geometry.md",
+      "destination": "docs/skills/travel-theme-builder/references/02-layout-geometry.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/03-typography.md",
+      "destination": "docs/skills/travel-theme-builder/references/03-typography.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/04-assets.md",
+      "destination": "docs/skills/travel-theme-builder/references/04-assets.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/05-map-rendering.md",
+      "destination": "docs/skills/travel-theme-builder/references/05-map-rendering.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/06-postcard-composition.md",
+      "destination": "docs/skills/travel-theme-builder/references/06-postcard-composition.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/07-ambient-behavior.md",
+      "destination": "docs/skills/travel-theme-builder/references/07-ambient-behavior.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/08-validation.md",
+      "destination": "docs/skills/travel-theme-builder/references/08-validation.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/zh-CN/01-architecture.md",
+      "destination": "docs/skills/travel-theme-builder/references/zh-CN/01-architecture.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/zh-CN/02-layout-geometry.md",
+      "destination": "docs/skills/travel-theme-builder/references/zh-CN/02-layout-geometry.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/zh-CN/03-typography.md",
+      "destination": "docs/skills/travel-theme-builder/references/zh-CN/03-typography.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/zh-CN/04-assets.md",
+      "destination": "docs/skills/travel-theme-builder/references/zh-CN/04-assets.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/zh-CN/05-map-rendering.md",
+      "destination": "docs/skills/travel-theme-builder/references/zh-CN/05-map-rendering.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/zh-CN/06-postcard-composition.md",
+      "destination": "docs/skills/travel-theme-builder/references/zh-CN/06-postcard-composition.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/zh-CN/07-ambient-behavior.md",
+      "destination": "docs/skills/travel-theme-builder/references/zh-CN/07-ambient-behavior.md"
+    },
+    {
+      "source": "docs/skills/travel-theme-builder/references/zh-CN/08-validation.md",
+      "destination": "docs/skills/travel-theme-builder/references/zh-CN/08-validation.md"
+    },
+    {
+      "source": "docs/skills/owner-security-review/SKILL.md",
+      "destination": "docs/skills/owner-security-review/SKILL.md"
+    },
+    {
+      "source": "docs/skills/open-source-release-review/SKILL.md",
+      "destination": "docs/skills/open-source-release-review/SKILL.md"
+    },
+    {
+      "source": "public/travel/themes/parchment/parchment-background.png",
+      "destination": "public/travel/themes/parchment/parchment-background.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/button-frame-sm.png",
+      "destination": "public/travel/themes/parchment/ui/button-frame-sm.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/button-frame-md.png",
+      "destination": "public/travel/themes/parchment/ui/button-frame-md.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/button-frame-lg.png",
+      "destination": "public/travel/themes/parchment/ui/button-frame-lg.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/legend-frame.png",
+      "destination": "public/travel/themes/parchment/ui/legend-frame.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/marker-journey.png",
+      "destination": "public/travel/themes/parchment/ui/marker-journey.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/marker-location.png",
+      "destination": "public/travel/themes/parchment/ui/marker-location.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/postcard-frame.png",
+      "destination": "public/travel/themes/parchment/ui/postcard-frame.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/timeline-active.png",
+      "destination": "public/travel/themes/parchment/ui/timeline-active.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/timeline-next.png",
+      "destination": "public/travel/themes/parchment/ui/timeline-next.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/timeline-prev.png",
+      "destination": "public/travel/themes/parchment/ui/timeline-prev.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/timeline-track.png",
+      "destination": "public/travel/themes/parchment/ui/timeline-track.png"
+    },
+    {
+      "source": "public/travel/themes/parchment/ui/zoom-control.png",
+      "destination": "public/travel/themes/parchment/ui/zoom-control.png"
+    },
+    {
+      "source": "public/travel/themes/cyber/cyber-background.png",
+      "destination": "public/travel/themes/cyber/cyber-background.png"
+    },
+    {
+      "source": "public/travel/themes/cyber/ui/globe_land.jpeg",
+      "destination": "public/travel/themes/cyber/ui/globe_land.jpeg"
+    },
+    {
+      "source": "public/travel/themes/cyber/ui/globe_ocean.jpeg",
+      "destination": "public/travel/themes/cyber/ui/globe_ocean.jpeg"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/[download-name-redacted-2a4f982acc8e]",
+      "destination": "public/travel/themes/deep-sea/background.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/globe_land.jpeg",
+      "destination": "public/travel/themes/deep-sea/ui/globe_land.jpeg"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/globe_ocean.jpeg",
+      "destination": "public/travel/themes/deep-sea/ui/globe_ocean.jpeg"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/land-texture.png",
+      "destination": "public/travel/themes/deep-sea/ui/land-texture.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-7902862d2837]",
+      "destination": "public/travel/themes/deep-sea/ui/buttonFrames-sm.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-2099ebd54e4e]",
+      "destination": "public/travel/themes/deep-sea/ui/legendFrame.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-a5c7a079da0c]",
+      "destination": "public/travel/themes/deep-sea/ui/markers-journey.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-a9d87ca5c01b]",
+      "destination": "public/travel/themes/deep-sea/ui/markers-location.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-1fcfe4c9f159]",
+      "destination": "public/travel/themes/deep-sea/ui/postcardFrame.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-c493414c5726]",
+      "destination": "public/travel/themes/deep-sea/ui/switcher.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/timeline.jpeg",
+      "destination": "public/travel/themes/deep-sea/ui/timeline.jpeg"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-92e6e0b4a6b4]",
+      "destination": "public/travel/themes/deep-sea/ui/timeline-next.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/pearl_org.jpeg",
+      "destination": "public/travel/themes/deep-sea/ui/pearl_org.jpeg"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-661d59574658]",
+      "destination": "public/travel/themes/deep-sea/ui/timeline-previous.png"
+    },
+    {
+      "source": "public/travel/themes/deep-sea/ui/[download-name-redacted-89da7ae6d434]",
+      "destination": "public/travel/themes/deep-sea/ui/zoomControl.png"
+    },
+    {
+      "source": "public/travel/themes/ice-world/background.jpeg",
+      "destination": "public/travel/themes/ice-world/background.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/globe_land.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/globe_land.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/globe_ocean.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/globe_ocean.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/button1.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/button1.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/map-texture.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/map-texture.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/journey.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/journey.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/location.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/location.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/postcard-texture.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/postcard-texture.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/postcard-frame.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/postcard-frame.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/theme-change.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/theme-change.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/timeline-dot.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/timeline-dot.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/timeline.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/timeline.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/timeline_selected.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/timeline_selected.jpeg"
+    },
+    {
+      "source": "public/travel/themes/ice-world/ui/zoom.jpeg",
+      "destination": "public/travel/themes/ice-world/ui/zoom.jpeg"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/background.png",
+      "destination": "public/travel/themes/fairy-tale/background.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/globe_land.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/globe_land.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/globe_ocean.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/globe_ocean.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/button-frame.png",
+      "destination": "public/travel/themes/fairy-tale/ui/button-frame.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/legend-frame.png",
+      "destination": "public/travel/themes/fairy-tale/ui/legend-frame.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/journey.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/journey.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/location.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/location.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/postcard-frame.png",
+      "destination": "public/travel/themes/fairy-tale/ui/postcard-frame.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/theme.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/theme.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/timeline.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/timeline.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/future.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/future.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/timeline-spot.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/timeline-spot.png"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/fairy_texture/ago.png",
+      "destination": "public/travel/themes/fairy-tale/ui/fairy_texture/ago.png"
+    },
+    {
+      "source": "public/data/travel-city-mapping.json",
+      "destination": "public/data/travel-city-mapping.json"
+    },
+    {
+      "source": "public/travel/themes/fairy-tale/ui/owner-edit-frame.png",
+      "destination": "public/travel/themes/fairy-tale/ui/owner-edit-frame.png"
+    }
+  ]
+}

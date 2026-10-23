@@ -1,0 +1,3 @@
+import {defineConfig} from '@playwright/test';import {mkdtempSync} from 'node:fs';
+const directory=mkdtempSync('/private/tmp/wa-local-test-browser-');
+export default defineConfig({testDir:'tests/browser-local',timeout:360000,workers:1,outputDir:'artifacts/local-browser',reporter:[['list'],['json',{outputFile:'artifacts/local-browser-results.json'}]],use:{baseURL:'http://127.0.0.1:5176',channel:'chrome',headless:true,viewport:{width:1440,height:1000},launchOptions:{args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']}},webServer:{command:`ATLAS_TEST_STORAGE=${directory} npm run dev:local -- --test-storage --port=5176`,url:'http://127.0.0.1:5176',reuseExistingServer:false}});

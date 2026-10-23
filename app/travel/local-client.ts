@@ -1,0 +1,9 @@
+import type {TravelEntry,TravelImage} from './travel-storage';
+export type LocalArchive={revision:number;places:TravelEntry[];local?:boolean;token?:string};
+let session='';
+export async function loadLocalArchive():Promise<LocalArchive>{const r=await fetch('/local-api/archive',{cache:'no-store'});if(!r.ok)throw new Error('Local archive unavailable. Check the local server; editing remains disabled.');const d=await r.json() as LocalArchive;if(!d.local||!d.token)throw new Error('Local editing capability unavailable');session=d.token;return d;}
+export async function localRequest(path:string,method:string,body?:BodyInit,headers:Record<string,string>={}):Promise<Response>{const r=await fetch('/local-api/'+path,{method,body,headers:{...headers,'X-Atlas-Session':session}});if(!r.ok){const e=await r.json().catch(()=>({error:'Local operation failed'}));throw new Error(e.error??'Local operation failed');}return r;}
+export async function saveLocalEntry(entry:TravelEntry,revision:number,creating:boolean){return (await localRequest('entries',creating?'POST':'PUT',JSON.stringify({entry,revision}),{'Content-Type':'application/json'})).json() as Promise<LocalArchive>;}
+export async function deleteLocalEntry(id:string,revision:number){return (await localRequest('entries','DELETE',JSON.stringify({id,revision}),{'Content-Type':'application/json'})).json() as Promise<LocalArchive>;}
+export async function uploadLocalImage(file:File):Promise<TravelImage>{const extension=file.name.split('.').pop()?.toLowerCase()??'';return (await (await localRequest('images','POST',file,{'Content-Type':file.type,'X-Image-Extension':extension})).json()).image;}
+export async function backupLocalArchive(){const blob=await (await localRequest('backup','POST')).blob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='wandering-atlas-private-backup.zip';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);}

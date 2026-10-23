@@ -1,0 +1,14 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { readFileSync, existsSync } from "node:fs";
+import { listEntries, getEntry } from "../app/travel/travel-data-source.ts";
+import { filterTravelEntries, getTravelYearRange } from "../app/travel/travel-time.ts";
+import { TRAVEL_THEME_REGISTRY, getTravelTheme } from "../app/travel/themes/registry.ts";
+const root = new URL("../", import.meta.url);
+test("synthetic JSON boundary supports Journey/Location and returns independent records", () => { const entries = listEntries(); assert.equal(entries.length, 4); assert.deepEqual(new Set(entries.map(e => e.type)), new Set(["journey", "location"])); assert.ok(entries.every(e => e.id.startsWith("sample-") && e.tags.some(t => ["synthetic", "sample"].includes(t)))); assert.equal(getEntry("missing"), null); entries[0].city = "Changed in memory"; assert.notEqual(getEntry(entries[0].id)!.city, "Changed in memory"); });
+test("all sample images are original local placeholders with usable gallery dimensions", () => { for (const entry of listEntries()) for (const image of [entry.coverImage, ...entry.photos]) { if (!image) continue; assert.match(image.src, /^\/images\/sample\/placeholder-[1-4]\.svg$/); assert.ok(image.width > 0 && image.height > 0); assert.ok(existsSync(new URL("public" + image.src, root))); } });
+test("Timeline preserves all/year filtering and undated locations", () => { const entries = listEntries(); const range = getTravelYearRange(entries); assert.ok(range.minYear <= 2020 && range.maxYear >= 2024); assert.equal(filterTravelEntries(entries, { mode: "all", focusedYear: 2022 }).length, 4); assert.ok(filterTravelEntries(entries, { mode: "year", focusedYear: 2020 }).some(e => e.id === "sample-journey-paris")); });
+test("only five completed themes and original copper/felt rendering implementations are available", () => { assert.deepEqual(TRAVEL_THEME_REGISTRY.map(t => t.id).sort(), ["cyber", "deep-sea", "fairy-tale", "ice-world", "parchment"]); assert.equal(getTravelTheme("not-a-theme").id, "parchment"); const globe = readFileSync(new URL("app/travel/components/TravelGlobe.tsx", root), "utf8"); assert.ok(globe.includes("TravelCopperGlobeSurface") && globe.includes("TravelFairyFeltGlobeSurface")); });
+test("every configured theme asset resolves locally", () => { const check = (value: unknown) => { if (typeof value === "string" && value.startsWith("/travel/")) assert.ok(existsSync(new URL("public" + value, root)), value); else if (value && typeof value === "object") Object.values(value).forEach(check); }; TRAVEL_THEME_REGISTRY.forEach(t => check(t.assets)); });
+
+test("sample labels follow the city name", () => { assert.deepEqual(listEntries().map(e => e.city), ["Paris (Sample Journey)", "Kyoto (Sample Location)", "Denver (Sample Journey)", "Sydney (Sample Location)"]); });
