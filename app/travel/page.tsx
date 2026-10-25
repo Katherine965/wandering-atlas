@@ -2,7 +2,7 @@
 
 import Image from "@/app/components/Image";
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
-import { ArrowLeft, BookOpen, Flag, MapPin, X } from "lucide-react";
+import { ArrowLeft, BookOpen, Check, Flag, MapPin, Pencil, X } from "lucide-react";
 import { listEntries } from "./travel-data-source";
 import { TravelAtlasStage } from "./components/TravelAtlasStage";
 import { TravelButton } from "./components/TravelButton";
@@ -195,9 +195,11 @@ export default function TravelPage() {
   const [postcardPhotoIndex, setPostcardPhotoIndex] = useState(0);
   const [postcardTab, setPostcardTab] = useState<PostcardTab>("photos");
   const [travelLocale, setTravelLocale] = useState<TravelLocale>("en");
-  const [travelThemeId, setTravelThemeId] = useTravelTheme();
+  const [desktopThemeId, setTravelThemeId] = useTravelTheme();
   const [mapView, setMapView] = useState<TravelMapView>("atlas");
   const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 760px), (pointer: coarse) and (max-height: 500px)").matches);
+  // Resolve before the first render: never mount a persisted desktop theme on mobile.
+  const travelThemeId = isMobile ? "cyber" : desktopThemeId;
   useEffect(() => {
     const query = window.matchMedia("(max-width: 760px), (pointer: coarse) and (max-height: 500px)");
     const update = () => setIsMobile(query.matches);
@@ -368,7 +370,7 @@ export default function TravelPage() {
   }, []);
 
   useEffect(() => {
-    if (selectedCountryId === null || countryDetailCache.has(selectedCountryId)) return;
+    if (isMobile || selectedCountryId === null || countryDetailCache.has(selectedCountryId)) return;
 
     let isCurrentSelection = true;
     const loadCountryDetails = async () => {
@@ -402,7 +404,7 @@ export default function TravelPage() {
     return () => {
       isCurrentSelection = false;
     };
-  }, [countryDetailCache, selectedCountryId]);
+  }, [countryDetailCache, isMobile, selectedCountryId]);
 
   useEffect(() => () => {
     if (returnToWorldTimerRef.current) clearTimeout(returnToWorldTimerRef.current);
@@ -586,6 +588,26 @@ export default function TravelPage() {
       >
       {LocalWorkspace && <Suspense fallback={null}><LocalWorkspace locale={travelLocale} entries={places} editing={localEditing} allowMapPicking={!isMobile} onReady={receiveReady} onArchive={receiveArchive} onSelect={setSelectedId} request={localRequest} onPicking={setLocalPicking} point={localPoint}/></Suspense>}
         <TravelHeader
+          showThemeSwitcher={!isMobile}
+          mobileEditControl={isMobile ? (
+            <button
+              type="button"
+              className="travel-mobile-edit-toggle"
+              disabled={!__ATLAS_LOCAL__ || !localReady}
+              aria-pressed={localEditing}
+              aria-label={travelLocale === "zh" ? (localEditing ? "结束编辑" : "开启编辑") : (localEditing ? "Finish editing" : "Enable editing")}
+              title={!__ATLAS_LOCAL__ ? (travelLocale === "zh" ? "只读演示；请使用本地编辑器进行编辑。" : "Read-only demo. Use the local editor to edit.") : undefined}
+              onClick={__ATLAS_LOCAL__ && localReady ? () => {
+                closeSelectedPlace();
+                setLocalRequest(null);
+                setLocalPicking(false);
+                setLocalEditing(current => !current);
+              } : undefined}
+            >
+              {localEditing ? <Check size={17} aria-hidden="true" /> : <Pencil size={17} aria-hidden="true" />}
+              <span>{travelLocale === "zh" ? (localEditing ? "完成" : "编辑") : (localEditing ? "Done" : "Edit")}</span>
+            </button>
+          ) : undefined}
           brandLayout={travelTheme.brandLayout}
           locale={travelLocale}
           theme={travelThemeId}
@@ -690,7 +712,7 @@ export default function TravelPage() {
               icon={<MapPin className="travel-button-icon" aria-hidden="true" />}
               aria-disabled={!__ATLAS_LOCAL__ || !localReady || !localEditing}
               tabIndex={__ATLAS_LOCAL__ && localReady && localEditing ? 0 : -1}
-              title={!__ATLAS_LOCAL__ || !localEditing ? ui.toolsUnavailable : undefined}
+              title={!__ATLAS_LOCAL__ ? ui.toolsUnavailable : !localEditing ? (isMobile ? (travelLocale === "zh" ? "请先开启编辑" : "Enable editing first") : ui.toolsUnavailable) : undefined}
               onClick={__ATLAS_LOCAL__ && localReady && localEditing ? () => openLocalTool("location") : undefined}
             >
               {ui.markPlace}
@@ -699,13 +721,17 @@ export default function TravelPage() {
               theme={travelTheme}
               frame="md"
               frameAsset="legend"
-              className={`travel-tool-journey${localEditing ? " is-active" : ""}`}
-              aria-pressed={localEditing}
+              className={`travel-tool-journey${!isMobile && localEditing ? " is-active" : ""}`}
+              aria-pressed={isMobile ? undefined : localEditing}
               icon={<Flag className="travel-button-icon" aria-hidden="true" />}
-              aria-disabled={!__ATLAS_LOCAL__ || !localReady}
-              tabIndex={__ATLAS_LOCAL__ && localReady ? 0 : -1}
-              title={!__ATLAS_LOCAL__ ? ui.toolsUnavailable : undefined}
-              onClick={__ATLAS_LOCAL__ && localReady ? () => { if (localEditing) { setLocalEditing(false); setLocalPicking(false); } else { setLocalEditing(true); } } : undefined}
+              aria-disabled={!__ATLAS_LOCAL__ || !localReady || (isMobile && !localEditing)}
+              tabIndex={__ATLAS_LOCAL__ && localReady && (!isMobile || localEditing) ? 0 : -1}
+              title={!__ATLAS_LOCAL__ ? ui.toolsUnavailable : isMobile && !localEditing ? (travelLocale === "zh" ? "请先开启编辑" : "Enable editing first") : undefined}
+              onClick={__ATLAS_LOCAL__ && localReady && (!isMobile || localEditing) ? () => {
+                if (isMobile) openLocalTool("journey");
+                else if (localEditing) { setLocalEditing(false); setLocalPicking(false); }
+                else setLocalEditing(true);
+              } : undefined}
             >
               {ui.beginJourney}
             </TravelButton>
@@ -727,6 +753,9 @@ export default function TravelPage() {
 
         {activeMapView === "globe" && globeVisuals ? (
           <TravelGlobe
+            mobile={isMobile}
+            onCountrySelect={isMobile ? handleCountrySelect : undefined}
+            selectedCountryId={isMobile ? selectedCountryId : null}
             ariaLabel={ui.globeView}
             countryGeoJson={worldCountryGeoJson}
             landmassGeoJson={worldLandmassGeoJson}

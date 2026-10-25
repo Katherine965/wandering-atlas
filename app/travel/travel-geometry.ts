@@ -210,7 +210,7 @@ export function createAtlasPaths(
   }));
 }
 
-function getCountryId(properties: Record<string, unknown> | null, index: number) {
+export function getCountryId(properties: Record<string, unknown> | null, index: number) {
   const candidates = [
     properties?.ISO_A3,
     properties?.ADM0_A3,

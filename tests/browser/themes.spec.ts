@@ -10,13 +10,14 @@ for(const theme of themes) test(theme.id + " read-only desktop interactions and 
  await page.getByRole("button",{name:/^Open Kyoto \(Sample Location\)/}).click(); await expect(page.getByRole("heading",{name:"Kyoto (Sample Location)"})).toBeVisible(); await page.keyboard.press("Escape");
  await page.getByRole("button",{name:"Next year",exact:true}).click(); await page.getByRole("button",{name:"Previous year",exact:true}).click(); await page.locator(".travel-timeline-mode").click(); await expect(page.locator(".travel-timeline")).toHaveClass(/is-mode-year/); await page.locator(".travel-timeline-mode").click();
  await page.getByRole("button",{name:"Globe View",exact:true}).click(); await expect(page.locator(".travel-globe-map")).toBeVisible();
- if(theme.id==="parchment") await expect(page.locator("canvas[data-copper-surface]")).toBeVisible();
+ if(theme.id==="parchment") await expect(page.locator("canvas[data-copper-surface]")).toBeVisible({timeout:30000});
  if(theme.id==="fairy-tale") { await expect(page.locator("canvas[data-felt-stage='final']")).toBeVisible({timeout:30000}); expect(Number(await page.locator("canvas[data-felt-stage]").getAttribute("data-fiber-count"))).toBeGreaterThan(0); }
  const globe=page.locator(".travel-globe-map"); const box=await globe.boundingBox(); expect(box).not.toBeNull(); await page.mouse.move(box!.x+box!.width/2,box!.y+box!.height/2); await page.mouse.down(); await page.mouse.move(box!.x+box!.width/2+35,box!.y+box!.height/2+12,{steps:5}); await page.mouse.up();
  await page.emulateMedia({reducedMotion:"reduce"}); if (process.env.ATLAS_CAPTURE === "1") await page.screenshot({path:testInfo.outputPath(theme.id+"-globe-reduced-motion.png"),fullPage:false,animations:"disabled",timeout:15000});
  await page.getByRole("button",{name:"Atlas View",exact:true}).click(); await expect(page.locator("canvas.travel-copper-globe-surface, canvas.travel-fairy-felt-globe-surface")).toHaveCount(0); await page.getByRole("button",{name:"中文",exact:true}).click(); await expect(page.getByRole("heading",{name:"漫游图志"})).toBeVisible(); await page.getByRole("button",{name:"EN",exact:true}).click();
  for(const viewport of [{width:390,height:844},{width:375,height:667},{width:430,height:932}]) {
   await page.setViewportSize(viewport);
+  await expect(page.locator("[data-travel-theme]")).toHaveAttribute("data-travel-theme","cyber",{timeout:15000});
   await expect(page.locator(".travel-globe-map")).toBeVisible();
   await expect(page.locator(".travel-atlas-map")).toHaveCount(0);
   await expect(page.getByRole("button",{name:"Atlas View",exact:true})).toBeHidden();
@@ -29,8 +30,9 @@ for(const theme of themes) test(theme.id + " read-only desktop interactions and 
   });
   expect(Math.abs(alignment.selectionX-alignment.focusX)).toBeLessThan(1);
   for(const y of alignment.arrowY)expect(Math.abs(y-alignment.focusY)).toBeLessThan(1);
-  const switcher=await page.getByRole("button",{name:"Change Atlas"}).boundingBox();
-  expect(switcher!.width).toBeGreaterThanOrEqual(44);expect(switcher!.x).toBeGreaterThanOrEqual(0);expect(switcher!.x+switcher!.width).toBeLessThanOrEqual(viewport.width);
+  await expect(page.getByRole("button",{name:"Change Atlas"})).toHaveCount(0);
+  await expect(page.locator("[data-travel-theme]")).toHaveAttribute("data-travel-theme","cyber");
+  await expect(page.locator(".travel-globe-map")).toHaveAttribute("data-globe-render-mode","mobile-lite");
   await expect.poll(async()=>page.locator(".travel-globe-hit-surface").evaluate(e=>e.getBoundingClientRect().width)).toBeGreaterThan(viewport.width*.85);
   const sphere=await page.locator(".travel-globe-hit-surface").boundingBox();
   expect(sphere!.x).toBeGreaterThanOrEqual(0);expect(sphere!.x+sphere!.width).toBeLessThanOrEqual(viewport.width);
@@ -38,7 +40,10 @@ for(const theme of themes) test(theme.id + " read-only desktop interactions and 
   for(const tool of await page.locator(".travel-explorer-tools button").all()) { const box=await tool.boundingBox(); expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(viewport.width); }
   if(process.env.ATLAS_CAPTURE==="1")await page.screenshot({path:testInfo.outputPath(`${theme.id}-mobile-${viewport.width}-globe.png`),animations:"disabled",timeout:15000});
  }
- await page.setViewportSize({width:1440,height:1000});await expect(page.locator(".travel-atlas-map")).toBeVisible();
+ await page.setViewportSize({width:1440,height:1000});
+ await expect(page.locator("[data-travel-theme]")).toHaveAttribute("data-travel-theme",theme.id,{timeout:15000});
+ await expect(page.locator(".travel-atlas-map")).toBeVisible();
+ await expect(page.getByRole("button",{name:"Change Atlas"})).toBeVisible();
  expect(await page.locator(".travel-timeline-year-cell").count()).toBeGreaterThan(3);
 
  expect(errors).toEqual([]); expect(apiRequests).toEqual([]); await expect(page.getByRole("button",{name:/Owner|Log in|Upload/})).toHaveCount(0); await expect(page.locator(".travel-explorer-tools button")).toHaveCount(3); for (const tool of await page.locator(".travel-explorer-tools button").all()) await expect(tool).toBeDisabled();

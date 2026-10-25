@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  geoContains,
   geoDistance,
   geoGraticule,
   geoOrthographic,
@@ -9,9 +10,10 @@ import {
 } from "d3-geo";
 import type {
   CSSProperties,
+  MouseEvent as ReactMouseEvent,
   PointerEvent as ReactPointerEvent,
 } from "react";
-import { useEffect, useEffectEvent, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useEffectEvent, useRef, useState } from "react";
 import type {
   AvailableTravelTheme,
   TravelGlobeMaterial,
@@ -20,6 +22,7 @@ import type {
 } from "../themes/types";
 import type { TravelEntry } from "../travel-storage";
 import {
+  getCountryId,
   TRAVEL_GLOBE_GEOMETRY,
   TRAVEL_VIEWBOX_HEIGHT,
   TRAVEL_VIEWBOX_WIDTH,
@@ -27,14 +30,8 @@ import {
   type TravelGlobeRotation,
   type TravelProjectedPoint,
 } from "../travel-geometry";
-import {
-  TravelCopperGlobeSurface,
-  type TravelCopperGlobeSurfaceHandle,
-} from "./TravelCopperGlobeSurface";
-import {
-  TravelFairyFeltGlobeSurface,
-  type TravelFairyFeltGlobeSurfaceHandle,
-} from "./TravelFairyFeltGlobeSurface";
+import type { TravelCopperGlobeSurfaceHandle } from "./TravelCopperGlobeSurface";
+import type { TravelFairyFeltGlobeSurfaceHandle } from "./TravelFairyFeltGlobeSurface";
 import {
   TravelGlobeGeographicLabels,
   type TravelGlobeGeographicLabelsHandle,
@@ -43,6 +40,10 @@ import {
   TravelMarkerLayer,
   type TravelMarkerLayerHandle,
 } from "./TravelMarkerLayer";
+
+// Mobile's SVG projection never needs to download or initialize Three.js surfaces.
+const TravelCopperGlobeSurface = lazy(() => import("./TravelCopperGlobeSurface").then(module => ({ default: module.TravelCopperGlobeSurface })));
+const TravelFairyFeltGlobeSurface = lazy(() => import("./TravelFairyFeltGlobeSurface").then(module => ({ default: module.TravelFairyFeltGlobeSurface })));
 
 type GlobeDragState = {
   pointerId: number;
@@ -57,6 +58,9 @@ type TravelGlobeProps = {
   initialRotation: TravelGlobeRotation;
   landmassGeoJson: TravelGeoFeatureCollection | null;
   material: TravelGlobeMaterial;
+  mobile?: boolean;
+  onCountrySelect?: (countryId: string) => void;
+  selectedCountryId?: string | null;
   onBackgroundClick: () => void;
   onPlaceSelect: (place: TravelEntry) => void;
   onRotationCommit: (rotation: TravelGlobeRotation) => void;
@@ -245,6 +249,9 @@ export function TravelGlobe({
   initialRotation,
   landmassGeoJson,
   material,
+  mobile = false,
+  onCountrySelect,
+  selectedCountryId = null,
   onBackgroundClick,
   onPlaceSelect,
   onRotationCommit,
@@ -259,6 +266,11 @@ export function TravelGlobe({
   const [isFairyFeltDebug, setIsFairyFeltDebug] = useState(false);
   const [isFairyFeltSurfaceReady, setIsFairyFeltSurfaceReady] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [mobileZoom, setMobileZoom] = useState(1);
+  const mobileZoomRef = useRef(1);
+  const pointersRef = useRef(new Map<number, { x: number; y: number }>());
+  const pinchRef = useRef<{ distance: number; zoom: number } | null>(null);
+  const scheduleRenderRef = useRef<(() => void) | null>(null);
   const [renderer] = useState(() => new TravelGlobeRenderer(initialRotation));
   const dragRef = useRef<GlobeDragState | null>(null);
   const previousFrameRef = useRef<number | null>(null);
@@ -272,30 +284,32 @@ export function TravelGlobe({
   const landGeometryRef = useRef<SVGPathElement | null>(null);
   const countriesRef = useRef<SVGPathElement | null>(null);
   const graticulePathRef = useRef<SVGPathElement | null>(null);
+  const interactionSvgRef = useRef<SVGSVGElement | null>(null);
+  const selectedCountryRef = useRef<SVGPathElement | null>(null);
   const landTextureRef = useRef<SVGImageElement | null>(null);
   const oceanTextureRef = useRef<SVGImageElement | null>(null);
   const projection = renderer.projection;
   const path = renderer.path;
 
   const textureLayout = theme.visuals.globe?.textureLayout;
-  const globeLandTexture = theme.assets.globe?.landTexture;
-  const globeOceanTexture = theme.assets.globe?.oceanTexture;
-  const globeSurfaceStyle = getGlobeSurfaceStyle(theme.visuals.globe?.surface);
+  const globeLandTexture = mobile ? undefined : theme.assets.globe?.landTexture;
+  const globeOceanTexture = mobile ? undefined : theme.assets.globe?.oceanTexture;
+  const globeSurfaceStyle = mobile ? {} : getGlobeSurfaceStyle(theme.visuals.globe?.surface);
   const surface = theme.visuals.globe?.surface;
-  const isTextureOnly = theme.visuals.globe?.renderMode === "texture-only";
-  const isProceduralCopper = theme.id === "parchment";
-  const isFairyFelt = theme.id === "fairy-tale";
+  const isTextureOnly = !mobile && theme.visuals.globe?.renderMode === "texture-only";
+  const isProceduralCopper = !mobile && theme.id === "parchment";
+  const isFairyFelt = !mobile && theme.id === "fairy-tale";
   const useDetailedFairyFelt = isFairyFelt && !prefersReducedMotion;
   const useProceduralCopper = isProceduralCopper && isCopperSurfaceReady;
   const useProceduralFairyFelt = isFairyFelt && isFairyFeltSurfaceReady;
-  const graticuleStepDegrees = surface?.graticuleStepDegrees ?? 10;
-  const hasGraticule = !isTextureOnly
+  const graticuleStepDegrees = mobile ? 30 : surface?.graticuleStepDegrees ?? 10;
+  const hasGraticule = mobile || !isTextureOnly
     && Boolean(surface?.graticuleStroke);
-  const hasLandBloom = !isTextureOnly
+  const hasLandBloom = !mobile && !isTextureOnly
     && (surface?.landBloomOpacity ?? (material === "crystalline" ? 0.3 : 0)) > 0;
-  const hasCoastGlowOuter = !isTextureOnly
+  const hasCoastGlowOuter = !mobile && !isTextureOnly
     && (surface?.coastGlowOuterOpacity ?? 0) > 0;
-  const hasCoastGlowInner = !isTextureOnly
+  const hasCoastGlowInner = !mobile && !isTextureOnly
     && (surface?.coastGlowInnerOpacity ?? 0) > 0;
   const graticuleGeometry = geoGraticule()
     .step([graticuleStepDegrees, graticuleStepDegrees])();
@@ -308,6 +322,10 @@ export function TravelGlobe({
     && showCountryBorders && countryGeoJson
     ? path(countryGeoJson) ?? undefined
     : undefined;
+  const selectedCountry = mobile && selectedCountryId
+    ? countryGeoJson?.features.find((feature, index) => getCountryId(feature.properties, index) === selectedCountryId)
+    : undefined;
+  const selectedCountryPath = selectedCountry ? path(selectedCountry) ?? undefined : undefined;
   const globeCenter = projection.invert?.([
     TRAVEL_GLOBE_GEOMETRY.centerX,
     TRAVEL_GLOBE_GEOMETRY.centerY,
@@ -346,6 +364,7 @@ export function TravelGlobe({
       ? path(graticuleGeometry) ?? undefined
       : undefined;
     setPathData([graticulePathRef.current], nextGraticulePath);
+    setPathData([selectedCountryRef.current], selectedCountry ? path(selectedCountry) ?? undefined : undefined);
 
     if (globeOceanTexture) {
       setTexturePosition(
@@ -416,6 +435,23 @@ export function TravelGlobe({
   }, []);
 
   useEffect(() => {
+    if (!mobile) return;
+    const svg = interactionSvgRef.current;
+    if (!svg) return;
+    // Keep pinch gestures on the globe instead of also zooming the browser viewport.
+    // Single taps remain native clicks for country selection.
+    const preventViewportPinch = (event: TouchEvent) => {
+      if (event.touches.length > 1 && event.cancelable) event.preventDefault();
+    };
+    svg.addEventListener("touchstart", preventViewportPinch, { passive: false });
+    svg.addEventListener("touchmove", preventViewportPinch, { passive: false });
+    return () => {
+      svg.removeEventListener("touchstart", preventViewportPinch);
+      svg.removeEventListener("touchmove", preventViewportPinch);
+    };
+  }, [mobile]);
+
+  useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       const isDebug = isFairyFelt
         && process.env.NODE_ENV !== "production"
@@ -456,7 +492,8 @@ export function TravelGlobe({
       let shouldRender = renderer.rotationDirty;
 
       if (
-        !prefersReducedMotion
+        !mobile
+        && !prefersReducedMotion
         && !isFairyFeltDebug
         && previousTimestamp !== null
         && dragRef.current === null
@@ -487,18 +524,20 @@ export function TravelGlobe({
         renderRotation(nextRotation);
       }
 
-      scheduleAnimationFrame();
+      if (!mobile) scheduleAnimationFrame();
     }
 
+    scheduleRenderRef.current = scheduleAnimationFrame;
     document.addEventListener("visibilitychange", handleVisibilityChange);
     scheduleAnimationFrame();
 
     return () => {
+      scheduleRenderRef.current = null;
       if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       previousFrameRef.current = null;
     };
-  }, [isFairyFeltDebug, prefersReducedMotion, renderer]);
+  }, [isFairyFeltDebug, mobile, prefersReducedMotion, renderer]);
 
   function projectCoordinates({ latitude, longitude }: NonNullable<TravelEntry["coordinates"]>): TravelProjectedPoint {
     const projected = projection([longitude, latitude]);
@@ -538,6 +577,18 @@ export function TravelGlobe({
   function handlePointerDown(event: ReactPointerEvent<SVGPathElement>) {
     if (event.pointerType === "mouse" && event.button !== 0) return;
 
+    if (mobile) {
+      pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (pointersRef.current.size === 2) {
+        const [a, b] = [...pointersRef.current.values()];
+        pinchRef.current = { distance: Math.max(Math.hypot(a.x - b.x, a.y - b.y), 1), zoom: mobileZoomRef.current };
+        dragRef.current = null;
+        suppressClickRef.current = true;
+        event.currentTarget.setPointerCapture(event.pointerId);
+        return;
+      }
+    }
+
     resumeAutoRotationAtRef.current = Number.POSITIVE_INFINITY;
     previousFrameRef.current = null;
     suppressClickRef.current = false;
@@ -552,6 +603,16 @@ export function TravelGlobe({
   }
 
   function handlePointerMove(event: ReactPointerEvent<SVGPathElement>) {
+    if (mobile && pointersRef.current.has(event.pointerId)) {
+      pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (pinchRef.current && pointersRef.current.size === 2) {
+        const [a, b] = [...pointersRef.current.values()];
+        const zoom = clamp(pinchRef.current.zoom * Math.hypot(a.x - b.x, a.y - b.y) / pinchRef.current.distance, 1, 1.6);
+        mobileZoomRef.current = zoom;
+        setMobileZoom(zoom);
+        return;
+      }
+    }
     const drag = dragRef.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
 
@@ -562,46 +623,78 @@ export function TravelGlobe({
     }
 
     renderer.setTargetRotation([
-      normalizeLongitude(drag.startRotation[0] + deltaX * GLOBE_DRAG_SENSITIVITY),
+      normalizeLongitude(drag.startRotation[0] + deltaX * GLOBE_DRAG_SENSITIVITY / (mobile ? mobileZoomRef.current : 1)),
       clamp(
-        drag.startRotation[1] - deltaY * GLOBE_DRAG_SENSITIVITY,
+        drag.startRotation[1] - deltaY * GLOBE_DRAG_SENSITIVITY / (mobile ? mobileZoomRef.current : 1),
         -GLOBE_MAX_LATITUDE_ROTATION,
         GLOBE_MAX_LATITUDE_ROTATION,
       ),
       0,
     ]);
+    scheduleRenderRef.current?.();
   }
 
   function finishDrag(event: ReactPointerEvent<SVGPathElement>) {
+    if (mobile && pointersRef.current.has(event.pointerId)) {
+      pointersRef.current.delete(event.pointerId);
+      if (pinchRef.current) {
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+        pinchRef.current = null;
+        const remaining = [...pointersRef.current.entries()][0];
+        dragRef.current = remaining ? {
+          pointerId: remaining[0], startX: remaining[1].x, startY: remaining[1].y, startRotation: renderer.rotation,
+        } : null;
+        setIsDragging(Boolean(remaining));
+        return;
+      }
+    }
     if (dragRef.current?.pointerId !== event.pointerId) return;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
     dragRef.current = null;
-    renderer.applyTargetRotation();
+    // Flush the last pointer movement before going idle; there is no mobile RAF loop.
+    if (mobile) scheduleRenderRef.current?.();
+    else renderer.applyTargetRotation();
     resumeAutoRotationAtRef.current = performance.now() + GLOBE_AUTO_ROTATION_RESUME_DELAY_MS;
     previousFrameRef.current = null;
     setIsDragging(false);
   }
 
-  function handleBackgroundClick() {
+  function handleBackgroundClick(event: ReactMouseEvent<SVGPathElement>) {
     if (suppressClickRef.current) {
       suppressClickRef.current = false;
       return;
     }
     onBackgroundClick();
+    if (mobile && onCountrySelect && countryGeoJson) {
+      const svg = event.currentTarget.ownerSVGElement;
+      const matrix = svg?.getScreenCTM();
+      if (!svg || !matrix) return;
+      const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+      const coordinates = projection.invert?.([point.x, point.y]);
+      if (!coordinates) return;
+      const index = countryGeoJson.features.findIndex(feature => geoContains(feature, coordinates));
+      if (index >= 0) {
+        const id = getCountryId(countryGeoJson.features[index].properties, index);
+        onCountrySelect(id === "TWN" ? "CHN" : id);
+      }
+    }
   }
 
   return (
     <div
       className={`travel-globe-map${isDragging ? " is-dragging" : ""}${isFairyFeltDebug ? " is-fairy-felt-debug" : ""}`}
       data-globe-material={material}
-      data-globe-render-mode={theme.visuals.globe?.renderMode ?? "themed"}
+      data-globe-render-mode={mobile ? "mobile-lite" : theme.visuals.globe?.renderMode ?? "themed"}
       data-globe-surface={useProceduralFairyFelt ? "needle-felt-geometry" : "svg"}
-      style={{ ...globeSurfaceStyle, "--travel-marker-scale": 1 } as CSSProperties}
+      style={{ ...globeSurfaceStyle, "--travel-marker-scale": 1, "--travel-globe-zoom": mobile ? mobileZoom : 1 } as CSSProperties}
       role="group"
       aria-label={ariaLabel}
     >
+      <div className="travel-globe-content">
+      {mobile && <div className="travel-mobile-globe-sphere" aria-hidden="true" />}
+      <Suspense fallback={null}>
       {isProceduralCopper && (
         <TravelCopperGlobeSurface
           countryGeoJson={countryGeoJson}
@@ -627,6 +720,8 @@ export function TravelGlobe({
           showOutline={showOutline}
         />
       )}
+      </Suspense>
+      {!mobile && (
       <svg
         aria-hidden="true"
         className="travel-globe-svg travel-globe-static-backdrop"
@@ -676,6 +771,7 @@ export function TravelGlobe({
           </>
         )}
       </svg>
+      )}
 
       <svg
         aria-hidden="true"
@@ -805,7 +901,7 @@ export function TravelGlobe({
                 ref={landTextureRef}
                 {...landMaterialPattern}
               />
-            ) : theme.assets.landTexture ? (
+            ) : !mobile && theme.assets.landTexture ? (
               <image
                 className="travel-globe-land-texture"
                 height={TRAVEL_GLOBE_GEOMETRY.diameter}
@@ -816,7 +912,7 @@ export function TravelGlobe({
                 y={TRAVEL_GLOBE_GEOMETRY.centerY - globeRadius}
               />
             ) : null}
-            {!isTextureOnly && !useProceduralCopper && (
+            {!mobile && !isTextureOnly && !useProceduralCopper && (
               <use className="travel-globe-land-light" href="#travel-globe-land-geometry" />
             )}
           </g>
@@ -856,11 +952,12 @@ export function TravelGlobe({
           && showCountryBorders && countryPath && (
           <path className="travel-globe-countries" d={countryPath} ref={countriesRef} />
         )}
+        {mobile && selectedCountryPath && <path className="travel-globe-selected-country" d={selectedCountryPath} ref={selectedCountryRef} />}
         {!isTextureOnly && !useProceduralCopper && !useProceduralFairyFelt
           && showOutline && landPath && (
           <use className="travel-globe-coastline" href="#travel-globe-land-geometry" />
         )}
-        {!isTextureOnly && theme.visuals.globe?.labels && (
+        {!mobile && !isTextureOnly && theme.visuals.globe?.labels && (
           <TravelGlobeGeographicLabels
             projectCoordinates={projectLabelCoordinates}
             ref={geographicLabelsRef}
@@ -869,7 +966,7 @@ export function TravelGlobe({
         )}
       </svg>
 
-      {!isTextureOnly && !useProceduralCopper && !useProceduralFairyFelt && (
+      {!mobile && !isTextureOnly && !useProceduralCopper && !useProceduralFairyFelt && (
         <svg
           aria-hidden="true"
           className="travel-globe-svg travel-globe-static-foreground"
@@ -903,6 +1000,7 @@ export function TravelGlobe({
       <svg
         aria-hidden="true"
         className="travel-globe-svg travel-globe-interaction"
+        ref={interactionSvgRef}
         preserveAspectRatio="xMidYMid meet"
         viewBox={`0 0 ${TRAVEL_VIEWBOX_WIDTH} ${TRAVEL_VIEWBOX_HEIGHT}`}
       >
@@ -930,6 +1028,8 @@ export function TravelGlobe({
         viewBoxHeight={TRAVEL_VIEWBOX_HEIGHT}
         viewBoxWidth={TRAVEL_VIEWBOX_WIDTH}
       />
+      </div>
+      {mobile && selectedCountry && <span className="travel-mobile-country-label" role="status">{String(selectedCountry.properties?.NAME ?? selectedCountryId)}</span>}
     </div>
   );
 }

@@ -268,6 +268,17 @@
   .travel-journal { width:calc(100vw - 16px); min-height:0; max-height:calc(100svh - 16px); padding:58px 24px 52px; }
   .travel-journal-close { top:18px; right:18px; }
 }
+@media (max-width:760px), (pointer:coarse) and (max-height:500px) {
+  .travel-theme-cyber .travel-journal-layer {
+    padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+    backdrop-filter:none;
+  }
+  .travel-theme-cyber .travel-journal {
+    width:100%; min-height:0;
+    max-height:calc(min(100svh,100dvh) - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    filter:none; overscroll-behavior:contain;
+  }
+}
 /* Existing standalone archive text/actions remain unchanged. */
 .travel-local-entry-list{list-style:none;padding:0;display:grid;gap:12px;}
 .travel-local-entry-list li{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--travel-edit-line);padding:12px 0;flex-wrap:wrap;}

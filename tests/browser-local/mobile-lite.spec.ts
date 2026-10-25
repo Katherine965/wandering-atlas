@@ -1,0 +1,63 @@
+import { test, expect } from '@playwright/test';
+import sharp from 'sharp';
+
+test('Mobile Lite: local archive, Journey/Location editor, city coordinates, photos and small-screen scrolling', async ({ page }, info) => {
+  await page.setViewportSize({ width:390, height:844 });
+  await page.goto('/');
+  await expect(page.locator('[data-travel-theme]')).toHaveAttribute('data-travel-theme','cyber');
+  const journey=page.getByRole('button',{name:'Begin a Journey',exact:true});
+  const location=page.getByRole('button',{name:'Mark a Place',exact:true});
+  await expect(page.getByRole('button',{name:'Enable editing',exact:true})).toBeEnabled();
+  for(const button of [journey,location]) { await expect(button).toHaveAttribute('aria-disabled','true'); await button.dispatchEvent('click'); }
+  await expect(page.locator('.travel-log-form')).toHaveCount(0);
+  await page.getByRole('button',{name:'Open the Archive',exact:true}).click();
+  await expect(page.getByRole('dialog',{name:'Open the Archive',exact:true})).toBeVisible();
+  await expect(page.locator('.travel-local-entry-list button[aria-label^="Edit "]')).toHaveCount(0);
+  await page.getByRole('button',{name:'Close archive',exact:true}).click();
+  await page.getByRole('button',{name:'Enable editing',exact:true}).click();
+  await expect(journey).toHaveAttribute('aria-disabled','false');
+  await journey.click();
+  await expect(page.getByRole('heading',{name:'Log a Journey',exact:true})).toBeVisible();
+  const form=page.locator('.travel-log-form');
+  await form.locator('[name=country]').selectOption('France');
+  await form.locator('[name=cityChoice]').selectOption('Paris');
+  expect(Number(await form.locator('[name=latitude]').inputValue())).toBeGreaterThan(48);
+  expect(Number(await form.locator('[name=longitude]').inputValue())).toBeGreaterThan(2);
+  await form.locator('[name=startYear]').fill('2024');
+  await form.locator('[name=memory]').fill('Synthetic Mobile Lite QA memory. '.repeat(60));
+  const png=await sharp({create:{width:80,height:60,channels:3,background:'#154d6f'}}).png().toBuffer();
+  await form.locator('input[type=file]').last().setInputFiles([{name:'lite-test-one.png',mimeType:'image/png',buffer:png},{name:'lite-test-two.png',mimeType:'image/png',buffer:png}]);
+  await expect(form.locator('.travel-photo-preview')).toHaveCount(2);
+  const save=form.getByRole('button',{name:'Save Entry',exact:true});
+  await save.scrollIntoViewIfNeeded();
+  for(const viewport of [{width:390,height:844},{width:375,height:667},{width:430,height:932}]){
+    await page.setViewportSize(viewport);
+    await save.scrollIntoViewIfNeeded();
+    const r=await save.boundingBox();
+    expect(r!.y).toBeGreaterThanOrEqual(0);expect(r!.y+r!.height).toBeLessThan(viewport.height-8);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(viewport.width);
+    const dialog=await page.locator('.travel-local-dialog').boundingBox();
+    expect(dialog!.x).toBeGreaterThanOrEqual(0);expect(dialog!.y).toBeGreaterThanOrEqual(0);expect(dialog!.y+dialog!.height).toBeLessThanOrEqual(viewport.height);
+    if(process.env.ATLAS_CAPTURE==='1')await page.screenshot({path:info.outputPath(`editor-${viewport.width}.png`),animations:'disabled'});
+  }
+  await save.click();
+  await expect(page.locator('.travel-log-form')).toHaveCount(0);
+  await page.getByRole('button',{name:'Open the Archive',exact:true}).click();
+  await expect(page.getByRole('dialog',{name:'Open the Archive',exact:true})).toBeVisible();
+  await expect(page.locator('.travel-local-archive-images img').last()).toBeVisible();
+  if(process.env.ATLAS_CAPTURE==='1')await page.screenshot({path:info.outputPath('archive-mobile.png'),animations:'disabled'});
+  await page.getByRole('button',{name:'Close archive',exact:true}).click();
+  await page.getByRole('button',{name:'Mark a Place',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Log a Location',exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'Close entry editor',exact:true}).click();
+  await page.getByRole('button',{name:'Finish editing',exact:true}).click();
+  await expect(journey).toHaveAttribute('aria-disabled','true');
+  await expect(location).toHaveAttribute('aria-disabled','true');
+  await page.reload();
+  await expect(page.getByRole('button',{name:'Enable editing',exact:true})).toBeEnabled();
+  await expect(journey).toHaveAttribute('aria-disabled','true');
+  await page.getByRole('button',{name:'Open the Archive',exact:true}).click();
+  await expect(page.locator('.travel-local-archive-images img').last()).toBeVisible();
+  await page.getByRole('button',{name:'Close archive',exact:true}).click();
+  await expect(page.locator('.travel-globe-map image,canvas')).toHaveCount(0);
+});

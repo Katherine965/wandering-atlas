@@ -639,15 +639,21 @@ export const TravelFairyFeltGlobeSurface = forwardRef<
       fillLight.position.set(3.4, -1.4, 3.2);
       scene.add(hemisphere, keyLight, fillLight);
 
+      let renderedWidth = 0;
+      let renderedHeight = 0;
       const render = (rotation: TravelGlobeRotation) => {
         const renderStartedAt = performance.now();
         const width = Math.max(Math.round(renderCanvas.clientWidth), 1);
         const height = Math.max(Math.round(renderCanvas.clientHeight), 1);
-        const aspect = width / height;
-        renderer.setSize(width, height, false);
-        camera.left = -1.1 * aspect;
-        camera.right = 1.1 * aspect;
-        camera.updateProjectionMatrix();
+        if (width !== renderedWidth || height !== renderedHeight) {
+          const aspect = width / height;
+          renderer.setSize(width, height, false);
+          camera.left = -1.1 * aspect;
+          camera.right = 1.1 * aspect;
+          camera.updateProjectionMatrix();
+          renderedWidth = width;
+          renderedHeight = height;
+        }
         applyRotation(globeGroup, rotation);
         renderer.render(scene, camera);
         renderCanvas.dataset.lastRenderMs = (performance.now() - renderStartedAt).toFixed(2);

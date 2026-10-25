@@ -316,12 +316,18 @@ export const TravelCopperGlobeSurface = forwardRef<
     room.dispose();
     pmrem.dispose();
 
+    let renderedWidth = 0;
+    let renderedHeight = 0;
     const render = (rotation: TravelGlobeRotation) => {
       const width = Math.max(Math.round(canvas.clientWidth), 1);
       const height = Math.max(Math.round(canvas.clientHeight), 1);
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
+      if (width !== renderedWidth || height !== renderedHeight) {
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderedWidth = width;
+        renderedHeight = height;
+      }
       applyRotation(globe, rotation);
       renderer.render(scene, camera);
     };

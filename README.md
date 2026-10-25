@@ -15,22 +15,22 @@ The included demo is fictional. Your local records and uploaded photos stay in a
 - **Interactive Globe / World Map** — rotate the Globe or explore countries on the desktop Atlas, with map zoom, Outline and Borders controls.
 - **Journey & Location** — record countries, cities, dates, memories, ratings and photographs with distinct markers.
 - **Timeline / Postcard / Archive** — browse all years or focus on one, open a place's postcard, and explore its photo gallery.
-- **Five Visual Themes** — Parchment, Fairy Tale, Cyber, Deep Sea and Ice World, each with its own materials and decorative language.
+- **Five Desktop Themes** — Parchment, Fairy Tale, Cyber, Deep Sea and Ice World, each with its own materials and decorative language.
 - **Local Editing** — create, edit and delete entries; upload photos, arrange their order and choose a cover.
 - **Customizable Travel Archive** — edit the sample JSON, use local images, or extend the existing theme configuration.
-- **Mobile Globe** — a complete sphere, three primary actions and a three-year timeline with arrows and horizontal swipe navigation.
+- **Cyber Mobile Lite** — a lightweight, texture-free Globe with touch rotation and pinch zoom, three primary actions, an explicit Edit / Done switch and a three-year timeline. Mobile has no automatic rotation or theme switching.
 
 ## Five Visual Themes
 
-Choose **Change Atlas** to switch themes. Theme IDs are shown below for customization.
+On desktop, choose **Change Atlas** to switch themes. Mobile uses **Cyber Mobile Lite**. Theme IDs are shown below for customization.
 
 | Parchment · `parchment` | Fairy Tale · `fairy-tale` |
 | --- | --- |
 | ![Parchment copper Globe](docs/screenshots/parchment.png) | ![Fairy Tale felt Globe](docs/screenshots/fairy-tale.png) |
 | **Cyber · `cyber`** | **Deep Sea · `deep-sea`** |
 | ![Cyber illuminated Globe](docs/screenshots/cyber.png) | ![Deep Sea underwater Globe](docs/screenshots/deep-sea.png) |
-| **Ice World · `ice-world`** | **Mobile · Parchment** |
-| ![Ice World frozen Globe](docs/screenshots/ice-world.png) | <img src="docs/screenshots/mobile-globe.png" alt="Mobile Globe and three-year timeline" height="280"> |
+| **Ice World · `ice-world`** | **Cyber Mobile Lite** |
+| ![Ice World frozen Globe](docs/screenshots/ice-world.png) | <img src="docs/screenshots/mobile-globe.png" alt="Cyber Mobile Lite with an Edit switch, touch Globe and three-year timeline" height="280"> |
 
 ## Screenshots
 
@@ -48,7 +48,7 @@ Choose **Change Atlas** to switch themes. Theme IDs are shown below for customiz
 
 </details>
 
-These are actual browser captures, not mockups. Desktop screenshots use fictional demo entries or synthetic QA fixtures; photographs shown in them are original geometric placeholders. The mobile capture includes the final three-year timeline layout. [Capture provenance](docs/screenshots/README.md).
+These are actual browser captures, not mockups. Desktop screenshots use fictional demo entries or synthetic QA fixtures; photographs shown in them are original geometric placeholders. The mobile capture shows the current Cyber Mobile Lite demo; Edit is disabled in the read-only demo and available in the local editor. [Capture provenance](docs/screenshots/README.md).
 
 ## Quick Start
 
@@ -82,10 +82,14 @@ The built server runs at **http://127.0.0.1:4174**. This build uses the public s
 
 ## Local Editing
 
+On desktop:
+
 1. Select **Begin a Journey** to enable editing.
 2. Select **Mark a Place** to create a Journey or Location. Choose a city to fill coordinates, or enter them manually; desktop Atlas also supports picking a map point.
 3. Add dates, a memory, a rating and photographs. Arrange photos and set a cover before saving.
 4. Use **Open the Archive** to browse your collection and edit existing records.
+
+On mobile, select **Edit** first. **Begin a Journey** then creates a Journey, and **Mark a Place** creates a Location. Select **Done** to return to browsing; creation and record editing stay disabled until you enable editing again. The archive remains available for browsing in the local editor. A fresh page starts with editing off.
 
 Records, uploaded images and local backups are saved under **`.local/archive/`**, outside the public demo and excluded by `.gitignore`. They survive refreshing the page and restarting the local server. Preserve that complete directory, including its images, to keep your archive. Automated import/restore is not implemented in v1.0.
 
