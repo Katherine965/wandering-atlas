@@ -197,6 +197,13 @@ export default function TravelPage() {
   const [travelLocale, setTravelLocale] = useState<TravelLocale>("en");
   const [travelThemeId, setTravelThemeId] = useTravelTheme();
   const [mapView, setMapView] = useState<TravelMapView>("atlas");
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia("(max-width: 760px), (pointer: coarse) and (max-height: 500px)").matches);
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 760px), (pointer: coarse) and (max-height: 500px)");
+    const update = () => setIsMobile(query.matches);
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
   const [globeRotation, setGlobeRotation] = useState<TravelGlobeRotation>(
     TRAVEL_GLOBE_INITIAL_ROTATION,
   );
@@ -219,6 +226,12 @@ export default function TravelPage() {
   const [localRequest, setLocalRequest] = useState<{type:"journey"|"location"|"archive"|"edit";key:number;id?:string}|null>(null);
   const [localPicking, setLocalPicking] = useState(false);
   const [localPoint, setLocalPoint] = useState<{latitude:number;longitude:number;key:number}|null>(null);
+  useEffect(() => {
+    if (!isMobile) return;
+    setAtlasScope({kind: "world"});
+    setSelectedCountryId(null);
+    setLocalPicking(false);
+  }, [isMobile]);
   const receiveArchive = useCallback((archive:{places:TravelEntry[]}) => { setPlaces(archive.places); }, []);
   const receiveReady = useCallback((ready:boolean) => setLocalReady(ready), []);
   function openLocalTool(type:"journey"|"location"|"archive") { if (!localReady) return; if (type !== "archive") { closeSelectedPlace(); setMapView("atlas"); setAtlasScope({kind:"world"}); setSelectedCountryId(null); setTravelTime(t=>({...t,mode:"all"})); } setLocalRequest({type,key:Date.now()}); }
@@ -297,7 +310,7 @@ export default function TravelPage() {
   const travelTheme = getTravelTheme(travelThemeId);
   const globeVisuals = travelTheme.visuals.globe;
   const supportsGlobe = travelTheme.capabilities.globe && globeVisuals !== undefined;
-  const activeMapView: TravelMapView = mapView === "globe" && supportsGlobe ? "globe" : "atlas";
+  const activeMapView: TravelMapView = (isMobile || mapView === "globe") && supportsGlobe ? "globe" : "atlas";
   const canUseGlobe = supportsGlobe;
   const supportsMapDetail = travelTheme.capabilities.mapDetail;
   const usesIndependentMapDetail = travelTheme.id === "parchment";
@@ -571,7 +584,7 @@ export default function TravelPage() {
         hasSelection={Boolean(selectedPlace)}
         theme={travelTheme}
       >
-      {LocalWorkspace && <Suspense fallback={null}><LocalWorkspace locale={travelLocale} entries={places} editing={localEditing} onReady={receiveReady} onArchive={receiveArchive} onSelect={setSelectedId} request={localRequest} onPicking={setLocalPicking} point={localPoint}/></Suspense>}
+      {LocalWorkspace && <Suspense fallback={null}><LocalWorkspace locale={travelLocale} entries={places} editing={localEditing} allowMapPicking={!isMobile} onReady={receiveReady} onArchive={receiveArchive} onSelect={setSelectedId} request={localRequest} onPicking={setLocalPicking} point={localPoint}/></Suspense>}
         <TravelHeader
           brandLayout={travelTheme.brandLayout}
           locale={travelLocale}
@@ -847,6 +860,7 @@ export default function TravelPage() {
 
 
         <TravelTimeline
+          mobile={isMobile}
           years={timelineYears}
           focusedYear={effectiveTravelTime.focusedYear}
           mode={effectiveTravelTime.mode}

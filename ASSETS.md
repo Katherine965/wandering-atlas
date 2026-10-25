@@ -4,7 +4,7 @@ The MIT LICENSE applies to project-owned original code and original geometric sa
 
 ## AI-assisted / user-directed theme imagery
 
-The owner reports that most backgrounds, decorations and UI bitmaps were generated through ChatGPT image generation, sometimes using reference images or edits. The following 59 files are recorded under that **group-level AI-assisted / user-directed declaration**; it is not independent proof that every file was generated without third-party inputs. No exact reference/download exception list has yet been provided.
+The owner reports that most backgrounds, decorations and UI bitmaps were generated through ChatGPT image generation, sometimes using reference images or edits. The following 59 files are recorded under that **group-level AI-assisted / user-directed declaration**; it is not independent proof that every file was generated without third-party inputs. On 2026-10-25 the owner confirmed that the current 59-file release set has no known unresolved third-party input-rights or redistribution issue. This is an owner declaration, not independent reconstruction of each generation session or a claim that no references were ever used.
 
 All 59 have **Visual Review Passed**: the audit found no explicit third-party logo, recognizable film character or photographer watermark. Visual inspection does not verify input rights, identify invisible copying, or certify permission to redistribute. These images are not assigned 59 individual HOLDs. Identified unresolved reference/download exceptions must receive a file-specific HOLD.
 
@@ -12,13 +12,13 @@ To the extent the owner holds transferable rights in the included AI-assisted im
 
 ## External-reference / downloaded-material confirmation
 
-**Reference review status: PENDING**
+**Reference review status: OWNER CONFIRMED — no known unresolved third-party input-rights issues for v1.0 (2026-10-25)**
 
-The owner must identify the actual exceptions, or explicitly confirm that there are none. Do not invent a reference source from a filename. A reference image's permission to view or use it in generation does not automatically permit redistribution of that image or derivative content.
+The owner has confirmed no known unresolved exception requiring a file-level HOLD in the current release set. Any subsequently identified exception must be recorded below and assessed for its exact output file. Do not invent a reference source from a filename. A reference image's permission to view or use it in generation does not automatically permit redistribution of that image or derivative content.
 
 | Affected output file | Reference/input source URL or retained evidence | Input license or permission | Incorporated protected material / rationale | Decision |
 | --- | --- | --- | --- | --- |
-| Not yet identified by owner (group-level confirmation task, not an assertion that all files use references) | Pending | Pending | Pending | Identify exact exceptions; clear or exclude only affected files |
+| No unresolved exception reported in the owner's v1.0 declaration | No per-file external reference asserted | Owner declaration; independent input lineage not established | Visual Review Passed remains distinct from source-rights verification | Release under the qualified asset permission above; HOLD only a subsequently identified unresolved output |
 
 For each actual exception record the output path, reference creator/source, applicable license or written permission and its derivative/redistribution conditions. If unavailable, exclude that output from the first public package or replace it in a separately authorized task. Generic castles, hearts or teddy bears alone are not evidence of a protected franchise.
 
@@ -26,71 +26,71 @@ For each actual exception record the output path, reference creator/source, appl
 
 All files below have **Visual Review Passed**. FIRST means review the available origin clues first; it does not mean infringement or HOLD. Ten Deep Sea files have legacy download-style source names (ChatGPT outputs can also have download names). The Fairy Tale owner-edit frame has migration evidence but no original-input record. The remaining 48 have no file-specific external-source evidence; this is not proof that they used no references.
 
-For each row, replace Pending with **AI-only**, **External reference/download**, or **Unsure**. For external inputs add their URL/creator, license/permission and incorporated-material assessment to the exception table above. **Unsure about an actual source/permission issue → HOLD that exact output file** until cleared or excluded; do not HOLD unrelated original assets. No specific third-party reference has been proven by this audit, so no invented reference source or blanket file HOLD is entered.
+The v1.0 owner declaration applies to each listed output: no known unresolved third-party input-rights issue was reported. It does not classify every file as AI-only, prove that no references were used, or certify exclusive copyright. FIRST/NORMAL retain the earlier audit's origin-review priorities; they are not current HOLDs. The checked boxes record the owner declaration for this release, not an independent file-by-file source reconstruction. Detailed hashes and retained origin clues remain in docs/ASSET_PROVENANCE.csv.
 
-The checked box means the owner completed this confirmation, not merely that visual review passed. Detailed hashes and origin clues are in docs/ASSET_PROVENANCE.csv.
+If a specific unresolved reference/download issue is identified later, record its output path, source and permission above and HOLD or exclude that file; unrelated assets retain their qualified permission.
 
 | Confirmed | Final output path | Priority | Owner declaration |
 | --- | --- | --- | --- |
-| [ ] | `public/travel/themes/deep-sea/background.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/buttonFrames-sm.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/legendFrame.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/markers-journey.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/markers-location.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/postcardFrame.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/switcher.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/timeline-next.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/timeline-previous.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/zoomControl.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/owner-edit-frame.png` | FIRST | Pending |
-| [ ] | `public/travel/themes/cyber/cyber-background.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/cyber/ui/globe_land.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/cyber/ui/globe_ocean.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/globe_land.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/globe_ocean.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/land-texture.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/pearl_org.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/deep-sea/ui/timeline.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/background.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/button-frame.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/ago.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/future.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/globe_land.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/globe_ocean.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/journey.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/location.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/theme.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/timeline-spot.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/fairy_texture/timeline.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/legend-frame.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/fairy-tale/ui/postcard-frame.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/background.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/button1.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/globe_land.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/globe_ocean.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/journey.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/location.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/map-texture.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/postcard-frame.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/postcard-texture.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/theme-change.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/timeline-dot.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/timeline.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/timeline_selected.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/ice-world/ui/zoom.jpeg` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/parchment-background.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/button-frame-lg.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/button-frame-md.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/button-frame-sm.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/legend-frame.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/marker-journey.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/marker-location.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/postcard-frame.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/timeline-active.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/timeline-next.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/timeline-prev.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/timeline-track.png` | NORMAL | Pending |
-| [ ] | `public/travel/themes/parchment/ui/zoom-control.png` | NORMAL | Pending |
+| [x] | `public/travel/themes/deep-sea/background.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/buttonFrames-sm.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/legendFrame.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/markers-journey.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/markers-location.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/postcardFrame.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/switcher.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/timeline-next.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/timeline-previous.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/zoomControl.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/owner-edit-frame.png` | FIRST | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/cyber/cyber-background.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/cyber/ui/globe_land.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/cyber/ui/globe_ocean.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/globe_land.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/globe_ocean.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/land-texture.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/pearl_org.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/deep-sea/ui/timeline.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/background.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/button-frame.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/ago.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/future.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/globe_land.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/globe_ocean.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/journey.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/location.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/theme.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/timeline-spot.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/fairy_texture/timeline.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/legend-frame.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/fairy-tale/ui/postcard-frame.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/background.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/button1.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/globe_land.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/globe_ocean.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/journey.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/location.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/map-texture.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/postcard-frame.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/postcard-texture.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/theme-change.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/timeline-dot.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/timeline.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/timeline_selected.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/ice-world/ui/zoom.jpeg` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/parchment-background.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/button-frame-lg.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/button-frame-md.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/button-frame-sm.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/legend-frame.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/marker-journey.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/marker-location.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/postcard-frame.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/timeline-active.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/timeline-next.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/timeline-prev.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/timeline-track.png` | NORMAL | Owner confirmed: no known unresolved issue |
+| [x] | `public/travel/themes/parchment/ui/zoom-control.png` | NORMAL | Owner confirmed: no known unresolved issue |
 
 ## Excluded from first release
 

@@ -1,17 +1,27 @@
-# Outstanding Public Release Gates
+# v1.0 release readiness
 
-The application is a local release candidate, with a read-only public build and a separate local editor. It is not publicly published. P1 priorities below still block public distribution of the affected file while its rights are unresolved.
+The owner authorized the v1.0 public GitHub release on 2026-10-25. This document records current release scope and remaining operational steps; it does not authorize publication of subsequently discovered private data or unresolved third-party material.
 
-1. **Resolved — LICENSE public attribution.** Standard MIT text now credits `Copyright (c) 2026 Katherine965`. MIT covers project-owned original code; third-party components, data and theme bitmaps keep their own terms. This copyright credit does not clear pending image-reference rights.
-2. **P1 — ASSETS.md reference exceptions.** All 59 theme bitmaps have Visual Review Passed, not full source-rights clearance and not 59 blanket HOLDs. Owner must identify actual external-reference/download exceptions (or confirm none). Add exact output paths, reference source, permission and decision to the manual table. Only actual unresolved exceptions become file-level HOLD/exclusions. Use the 59-file checklist in ASSETS.md, with the 11 FIRST-priority files reviewed before the remaining 48. FIRST is an evidence-review priority, not a file HOLD. Do not assume no reference exceptions. Change the reference review status only after completing this review.
-3. **Resolved — public/data/travel-city-mapping.json.** All 99 coordinates regenerated from 95 Natural Earth and 4 GeoNames source records. Names/order/schema retained; city dropdown/autofill remains. Per-row evidence, retained source snapshots, full data terms and hashes are included. No old coordinates passed off as new-source data.
-4. **Resolved for current source/static builds — maps and dependency attachments.** Three GeoJSON files match pinned Natural Earth sources and terms; 59 bitmap hashes are recorded. d3/Lucide combined notices, fflate/sharp and relevant transitive terms are retained. Build/export now include attachments; npm-installed sharp/libvips is not an LGPL blocker. Any future bundled native binaries require a separate platform-specific review.
-5. **Other release review remains.** Browser/device visual and performance limits from the prior engineering audit, privacy/credential review of the actual package, and dependency updates need their own review. This license finishing task does not certify or alter UI quality.
+## Privacy and redistribution scope
 
-`npm run check:release` verifies the compiled artifact and enforces the remaining reference gates and any unresolved city-source status. Normal local builds can pass while those publication gates remain. For a source release perform the same rights decisions and retain the attached license/evidence files; do not ship `.local/`, uploads, backups, node_modules or test artifacts. No Stranger Things/Rusty Lake asset directories belong in the first release.
+- **Original code:** standard MIT LICENSE credits `Copyright (c) 2026 Katherine965`. Other materials retain their own terms.
+- **Theme imagery:** 59 files retain **Visual Review Passed**. The owner confirmed that this release set has no known unresolved third-party input-rights issue. ASSETS.md records this qualified owner declaration, not independent reconstruction of every generation session, an AI-only classification, or exclusive copyright. No specific file-level HOLD is currently reported. Any concrete later exception must be documented and cleared or excluded for that exact file.
+- **Geographic data:** three GeoJSON datasets have pinned Natural Earth sources and terms. All 99 city coordinates were regenerated from 95 Natural Earth and four GeoNames records with per-row evidence and CC BY 4.0 attribution. Source data and hashes remain unchanged.
+- **Dependencies and fonts:** full notices and terms are retained. The source/static package does not bundle native sharp/libvips binaries; npm installation is not an LGPL blocker.
+- **Private content:** `.local/`, private uploads, environment files, caches and build output remain excluded. The Git repository has an independent initial commit, not inherited Personal-OS history. README screenshots are real captures from fictional/synthetic archives with geometric placeholders.
+- **Excluded themes:** non-owned film/game themes remain absent from the five-theme release scope.
 
-No public GitHub repository, remote, push, deployment or production operation is authorized by creating this candidate. Detailed private source findings are not included.
+## Required release operations
 
-## Private source backup
+Run the existing tests and production build, then `npm run check:release` against the prepared build. Review the exact staged file list before committing, push only to `Katherine965/wandering-atlas`, confirm the remote tree, change visibility to Public and create v1.0.0. Do not force-push or alter Personal-OS.
 
-A private GitHub source backup to `Katherine965/wandering-atlas` is authorized. It is not a public release and does not clear asset reference review or any specific HOLD. Preserve all source and rights evidence; exclude private archives, uploaded photographs, credentials, build output and caches. Public visibility changes and deployment require a separate task.
+Git SSH authentication alone does not grant GitHub API permissions to change visibility or create Releases. If the current environment has no authenticated GitHub CLI or browser, stop after the verified push and use the repository's Settings → General → Danger Zone → Change repository visibility, then Releases → Draft a new release. Do not mark public access verified until it actually succeeds.
+
+## v1.1 candidates, not v1.0 blockers
+
+- Real-device iPhone Safari and Android touch/performance verification.
+- Optional performance profiling for Globe rendering and theme switching.
+- Small contrast/readability refinements based on user feedback.
+- Documentation and contributor workflows as usage grows.
+
+No new feature, backup/restore implementation, theme redesign or cloud system is part of this release task.

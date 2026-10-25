@@ -2,7 +2,7 @@
 
 import Image from "@/app/components/Image";
 import { useEffect, useRef } from "react";
-import type { CSSProperties, KeyboardEvent as ReactKeyboardEvent } from "react";
+import type { CSSProperties, KeyboardEvent as ReactKeyboardEvent, TouchEvent as ReactTouchEvent } from "react";
 import type { AvailableTravelTheme } from "../themes/types";
 import type { TravelTimeMode } from "../travel-time";
 
@@ -14,6 +14,7 @@ type TravelTimelineProps = {
   allYearsLabel: string;
   focusedYear: number;
   mode: TravelTimeMode;
+  mobile?: boolean;
   nextLabel: string;
   onFocusedYearChange: (year: number) => void;
   onModeChange: (mode: TravelTimeMode) => void;
@@ -28,23 +29,24 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
-function getLegacyVisibleYears(years: number[], focusedYear: number) {
-  if (years.length <= LEGACY_VISIBLE_YEAR_COUNT) return years;
+function getVisibleYears(years: number[], focusedYear: number, count: number) {
+  if (years.length <= count) return years;
 
   const focusedIndex = Math.max(years.indexOf(focusedYear), 0);
-  const halfWindow = Math.floor(LEGACY_VISIBLE_YEAR_COUNT / 2);
+  const halfWindow = Math.floor(count / 2);
   const start = clamp(
     focusedIndex - halfWindow,
     0,
-    years.length - LEGACY_VISIBLE_YEAR_COUNT,
+    years.length - count,
   );
-  return years.slice(start, start + LEGACY_VISIBLE_YEAR_COUNT);
+  return years.slice(start, start + count);
 }
 
 export function TravelTimeline({
   allYearsLabel,
   focusedYear,
   mode,
+  mobile = false,
   nextLabel,
   onFocusedYearChange,
   onModeChange,
@@ -55,6 +57,7 @@ export function TravelTimeline({
   years,
 }: TravelTimelineProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
+  const touchStartRef = useRef<{x: number; y: number} | null>(null);
   const scrollSettleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollSequenceRef = useRef(0);
   const settledScrollSequenceRef = useRef(-1);
@@ -68,7 +71,9 @@ export function TravelTimeline({
   const usesAssetFrame = timelineVisuals.frame === "asset" && Boolean(frameAsset);
   const usesAssetPoint = timelineVisuals.point === "asset" && Boolean(pointAsset);
   const isTimelineV2 = timelineVisuals.structure === "v2";
+  const visibleYears = mobile ? getVisibleYears(years, focusedYear, 3) : years;
   const timelineStyle = {
+    ...(mobile ? { "--timeline-mobile-selection": (Math.max(visibleYears.indexOf(focusedYear), 0) + .5) / Math.max(visibleYears.length, 1) } : {}),
     ...(frameAsset ? { "--timeline-frame-image": `url("${frameAsset}")` } : {}),
     ...(timelineLayout?.trackYPercent !== undefined
       ? { "--timeline-track-y": `${timelineLayout.trackYPercent}%` }
@@ -127,7 +132,7 @@ export function TravelTimeline({
   } as CSSProperties;
   const minYear = years[0] ?? focusedYear;
   const maxYear = years.at(-1) ?? focusedYear;
-  const legacyYears = getLegacyVisibleYears(years, focusedYear);
+  const legacyYears = getVisibleYears(years, focusedYear, mobile ? 3 : LEGACY_VISIBLE_YEAR_COUNT);
   const legacyActiveIndex = legacyYears.indexOf(focusedYear);
   const getLegacyPosition = (index: number) => legacyYears.length <= 1
     ? 50
@@ -147,6 +152,7 @@ export function TravelTimeline({
   }
 
   function scrollToYear(year: number, behavior: ScrollBehavior) {
+    if (mobile) return;
     const metrics = getScrollMetrics();
     if (!metrics) return;
     const yearIndex = clamp(year - minYear, 0, years.length - 1);
@@ -194,10 +200,25 @@ export function TravelTimeline({
   function focusYear(year: number) {
     const nextYear = clamp(year, minYear, maxYear);
     if (nextYear !== focusedYear) {
-      if (isTimelineV2) internalFocusedYearRef.current = nextYear;
+      if (isTimelineV2 && !mobile) internalFocusedYearRef.current = nextYear;
       onFocusedYearChange(nextYear);
     }
     if (isTimelineV2) scrollToYear(nextYear, getScrollBehavior());
+  }
+
+  function handleTouchStart(event: ReactTouchEvent<HTMLDivElement>) {
+    const touch = event.touches[0];
+    touchStartRef.current = mobile && event.touches.length === 1 ? {x: touch.clientX, y: touch.clientY} : null;
+  }
+
+  function handleTouchEnd(event: ReactTouchEvent<HTMLDivElement>) {
+    const start = touchStartRef.current;
+    touchStartRef.current = null;
+    const touch = event.changedTouches[0];
+    if (!mobile || !start || !touch) return;
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (Math.abs(dx) >= 32 && Math.abs(dx) > Math.abs(dy) * 1.2) focusYear(focusedYear + (dx < 0 ? 1 : -1));
   }
 
   function handleViewportKeyDown(event: ReactKeyboardEvent<HTMLDivElement>) {
@@ -207,8 +228,13 @@ export function TravelTimeline({
   }
 
   useEffect(() => {
-    if (!isTimelineV2) {
+    if (!isTimelineV2 || mobile) {
       internalFocusedYearRef.current = null;
+      if (scrollSettleTimerRef.current !== null) {
+        clearTimeout(scrollSettleTimerRef.current);
+        scrollSettleTimerRef.current = null;
+      }
+      settledScrollSequenceRef.current = scrollSequenceRef.current;
       return;
     }
     if (internalFocusedYearRef.current === focusedYear) {
@@ -228,10 +254,10 @@ export function TravelTimeline({
       });
     });
     return () => window.cancelAnimationFrame(animationFrame);
-  }, [focusedYear, isTimelineV2, minYear, years.length]);
+  }, [focusedYear, isTimelineV2, mobile, minYear, years.length]);
 
   useEffect(() => {
-    if (!isTimelineV2) return;
+    if (!isTimelineV2 || mobile) return;
     const viewport = viewportRef.current;
     if (!viewport) return;
 
@@ -273,7 +299,7 @@ export function TravelTimeline({
   if (isTimelineV2) {
     return (
       <section
-        className={`travel-timeline is-v2 is-mode-${mode}`}
+        className={`travel-timeline is-v2 is-mode-${mode}${mobile ? " is-mobile" : ""}`}
         aria-label={timelineLabel}
         style={timelineStyle}
       >
@@ -311,11 +337,14 @@ export function TravelTimeline({
             tabIndex={0}
             aria-label={`${timelineLabel}: ${focusedYear}`}
             onKeyDown={handleViewportKeyDown}
-            onScroll={scheduleScrollCommit}
+            onScroll={mobile ? undefined : scheduleScrollCommit}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={() => { touchStartRef.current = null; }}
           >
             <div className="travel-timeline-year-strip">
               <span className="travel-timeline-year-spacer" aria-hidden="true" />
-              {years.map((year) => (
+              {visibleYears.map((year) => (
                 <span className="travel-timeline-year-cell" key={year}>
                   <button
                     type="button"

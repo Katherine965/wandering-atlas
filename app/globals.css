@@ -1301,3 +1301,92 @@ button { font:inherit; }
   --travel-edit-shadow:rgba(4,28,66,.46);
 }
 
+
+/* Mobile uses a full, uncropped Globe with three local archive actions. */
+@media (max-width:760px), (pointer:coarse) and (max-height:500px) {
+  .travel-atlas-shell { display:block; padding:0; min-height:100svh; overflow:hidden; }
+  .travel-atlas-shell .travel-atlas-stage {
+    width:100%; min-width:0; height:100svh; min-height:0; aspect-ratio:auto; box-shadow:none;
+    --mobile-globe-diameter:min(calc(100vw - 24px),calc(100svh - 240px));
+  }
+  .travel-atlas-stage .travel-theme-background { background-size:cover; }
+  .travel-atlas-stage .travel-brand-cluster { top:22px; width:calc(100% - 96px); z-index:10; }
+  .travel-atlas-stage .travel-brand-cluster .travel-atlas-header h1 { font-size:clamp(22px,6.7vw,32px); line-height:1.15; }
+  .travel-atlas-stage .travel-brand-cluster .travel-atlas-header p { display:none; }
+  .travel-atlas-stage .travel-brand-cluster .travel-theme-switcher { top:-6px; right:calc(100% + 2px); left:auto; bottom:auto; width:44px; }
+  .travel-atlas-stage .travel-theme-menu { left:0; width:220px; padding:10px; border-width:1px; }
+  .travel-atlas-stage .travel-theme-menu button { min-height:40px; font-size:13px; }
+  .travel-atlas-stage .travel-toolbar { top:78px; left:12px; right:12px; min-height:48px; display:block; }
+  .travel-atlas-stage .travel-view-controls,
+  .travel-atlas-stage .travel-locale-switch,
+  .travel-atlas-stage .travel-zoom-controls,
+  .travel-atlas-stage .travel-map-reference-tools { display:none; }
+  .travel-atlas-stage .travel-explorer-tools { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; width:100%; }
+  .travel-atlas-stage .travel-explorer-tools .parchment-button { width:100%; min-width:0; height:48px; min-height:44px; padding:0; }
+  .travel-atlas-stage .travel-toolbar .parchment-button-frame { transform:none; }
+  .travel-atlas-stage .travel-toolbar .parchment-button-label { max-width:calc(100% - 8px); font-size:11px!important; line-height:1.15!important; gap:0!important; }
+  .travel-atlas-stage .travel-toolbar .travel-button-icon { display:none; }
+  .travel-atlas-stage .travel-globe-map {
+    inset:auto; left:50%; top:calc(50% + 20px);
+    width:calc(var(--mobile-globe-diameter) * 1672 / 485);
+    height:calc(var(--mobile-globe-diameter) * 941 / 485);
+    transform:translate(-50%,-50.5845%); overflow:visible;
+  }
+  .travel-atlas-shell .travel-atlas-stage .travel-timeline {
+    left:12px; bottom:12px; width:calc(100% - 24px); height:76px;
+    --travel-timeline-control-size:32px; --travel-timeline-gap:6px;
+  }
+  .travel-atlas-shell .travel-atlas-stage .travel-timeline-control { width:32px; height:32px; }
+  .travel-atlas-stage .travel-timeline-year { font-size:11px; }
+  .travel-atlas-stage .travel-marker-label { font-size:11px; line-height:1.15; }
+}
+@media (max-width:760px), (pointer:coarse) and (max-height:500px) {
+  .travel-atlas-stage .travel-theme-menu>p { font-size:11px; }
+  .travel-atlas-stage .travel-theme-menu button span { font-size:13px; }
+  .travel-atlas-stage .travel-theme-menu button small { font-size:11px; }
+  .travel-atlas-stage .travel-timeline-year-label,
+  .travel-atlas-stage .travel-timeline-years button,
+  .travel-atlas-stage .travel-timeline-years button.is-active { font-size:11px; }
+  .travel-atlas-stage .travel-timeline-mode { font-size:10px; padding:6px; }
+}
+@media (max-width:760px), (pointer:coarse) and (max-height:500px) {
+  .travel-atlas-shell .travel-atlas-stage .travel-timeline {
+    transform:none;
+    grid-template-columns:32px minmax(0,1fr) 32px;
+    gap:6px;
+    --timeline-safe-left:12px;
+    --timeline-functional-width:calc(100vw - 124px);
+    --timeline-year-spacing:52px;
+    --timeline-edge-spacer:calc((100vw - 176px) / 2);
+    --timeline-year-hitbox-width:40px;
+    --timeline-year-hitbox-height:40px;
+  }
+  .travel-atlas-stage .travel-timeline-v2-frame { width:100%; height:76px; }
+  .travel-atlas-stage .travel-timeline-v2-frame-art.is-asset { background:var(--timeline-frame-image) center/100% 100% no-repeat; transform:none; }
+  .travel-atlas-stage .travel-timeline-v2-frame-slice { display:none; }
+  .travel-atlas-stage .travel-timeline-v2-frame>.travel-timeline-mode { top:0; left:12px; }
+  .travel-atlas-stage .travel-timeline-selection { width:20px; height:20px; }
+}
+
+@media (max-width:760px), (pointer:coarse) and (max-height:500px) {
+  .travel-atlas-shell .travel-atlas-stage.travel-theme-fairy-tale {
+    --mobile-globe-diameter:min(calc((100vw - 24px) / 1.06),calc((100svh - 240px) / 1.06));
+  }
+  .travel-atlas-shell .travel-timeline.is-v2>.travel-timeline-control {
+    position:absolute; top:var(--timeline-track-y); left:0; margin-top:0; transform:translateY(-50%);
+  }
+  .travel-atlas-shell .travel-timeline.is-v2>.travel-timeline-control.is-next { left:auto; right:0; }
+  .travel-atlas-stage .travel-timeline.is-mobile .travel-timeline-v2-frame { grid-column:2; }
+  .travel-atlas-stage .travel-timeline.is-mobile .travel-timeline-viewport { overflow:hidden; scroll-snap-type:none; touch-action:pan-y; }
+  .travel-atlas-stage .travel-timeline.is-mobile .travel-timeline-year-strip { width:100%; }
+  .travel-atlas-stage .travel-timeline.is-mobile .travel-timeline-year-spacer { display:none; }
+  .travel-atlas-stage .travel-timeline.is-mobile .travel-timeline-year-cell { flex:1 1 0; min-width:0; }
+  .travel-atlas-shell .travel-atlas-stage .travel-timeline.is-mobile .travel-timeline-year-label { font-size:11px; margin-top:6px; }
+  .travel-atlas-shell .travel-atlas-stage:is(.travel-theme-cyber,.travel-theme-deep-sea,.travel-theme-ice-world) .travel-timeline.is-mobile .travel-timeline-v2-frame-art {
+    transform:scaleY(1.5); transform-origin:50% var(--timeline-track-y);
+  }
+  .travel-atlas-stage .travel-timeline.is-mobile .travel-timeline-selection {
+    left:calc(var(--timeline-safe-left) + var(--timeline-functional-width) * var(--timeline-mobile-selection));
+  }
+  .travel-atlas-stage .travel-timeline.is-mobile .travel-timeline-v2-frame-hud-track { left:var(--timeline-safe-left); right:var(--timeline-safe-left); }
+}

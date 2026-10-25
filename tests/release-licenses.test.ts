@@ -63,10 +63,10 @@ test("static release checks reject missing notices, altered data/assets, exclude
   try {
     await cp(new URL("public/", root), output, { recursive: true });
     await copyReleaseLicenses(output);
-    await t.test("attachments pass while the image-reference publication gate remains", async () => {
+    await t.test("attachments and the owner-confirmed v1.0 publication review pass", async () => {
       const gates = await checkReleaseLicenses(output);
-      assert.equal(gates.length, 1);
-      await assert.rejects(checkReleaseLicenses(output, true), /Publication review incomplete/);
+      assert.equal(gates.length, 0);
+      await checkReleaseLicenses(output, true);
     });
     await t.test("missing font license fails", async () => {
       const path = join(output, "licenses/fontsource-instrument-serif-LICENSE.txt");

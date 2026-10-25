@@ -74,6 +74,7 @@ export function TravelThemeSwitcher({
         {activeTheme.renderers.switcher === "asset" && activeTheme.assets.switcher ? (
           <Image
             src={activeTheme.assets.switcher}
+            priority
             alt=""
             fill
             sizes="64px"

@@ -1,6 +1,6 @@
 # Third-party notices and distribution scope
 
-The standard MIT text in LICENSE covers project-owned original code and the four original geometric sample SVGs. Third-party packages, fonts, data and vendored files retain their own terms. Theme bitmaps have separate, qualified permissions and pending reference review in ASSETS.md. MIT does not license private uploads or third-party inputs. The public copyright attribution in LICENSE is Katherine965.
+The standard MIT text in LICENSE covers project-owned original code and the four original geometric sample SVGs. Third-party packages, fonts, data and vendored files retain their own terms. Theme bitmaps have separate, qualified permissions and the owner's v1.0 reference review declaration in ASSETS.md. MIT does not license private uploads or third-party inputs. The public copyright attribution in LICENSE is Katherine965.
 
 ## Runtime, font and vendored components
 
